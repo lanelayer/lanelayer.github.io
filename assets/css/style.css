@@ -256,6 +256,22 @@ body {
     margin: 0 auto;
 }
 
+/* Homepage specific layout - full width */
+.homepage .main-layout {
+    display: block;
+    max-width: 100%;
+}
+
+.homepage .main-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.homepage .sidebar {
+    display: none;
+}
+
 /* Sidebar */
 .sidebar {
     width: 280px;
