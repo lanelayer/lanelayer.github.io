@@ -1,0 +1,7 @@
+title: LaneLayer Documentation
+description: Documentation for the LaneLayer project, including Core Lane and Filler Bot.
+baseurl: ""
+url: "https://lanelayer.github.io"
+markdown: kramdown
+highlighter: rouge
+include: ['_pages']
