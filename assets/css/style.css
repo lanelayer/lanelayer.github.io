@@ -263,13 +263,14 @@ body {
 }
 
 .homepage .main-content {
-    width: 100%;
+    width: 100% !important;
     max-width: 1200px;
     margin: 0 auto;
+    flex: none !important;
 }
 
 .homepage .sidebar {
-    display: none;
+    display: none !important;
 }
 
 /* Sidebar */

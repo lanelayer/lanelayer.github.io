@@ -5,43 +5,21 @@ title: Terminology
 
 # Terminology
 
-**LaneLayer**: A coordination layer for deals, anchored in Bitcoin. It enables trustless swaps, lending, betting, and payments without locking BTC in risky contracts.
+**LaneLayer**: A coordination layer for intent-driven execution, anchored in Bitcoin. It enables trustless swaps, lending, betting, and payments without locking BTC in risky contracts.
 
-**Core Lane**: The execution environment that processes deals and coordinates with Bitcoin. It handles intent-based transactions and deal fulfillment.
+**Core Lane**: A Bitcoin-anchored execution environment that processes Bitcoin burns and Core Lane DA transactions. It runs as a Rust binary (`core-lane-node`) that connects to Bitcoin RPC and provides Ethereum-compatible JSON-RPC at port 8545.
 
-**LaneLayer Filler Bot**: An automated system that monitors for deals and fulfills them by executing the necessary Bitcoin transactions and laneBTC transfers.
+**LaneLayer Filler Bot**: An automated system (`lanelayer-filler-bot`) that monitors for intents and fulfills them by executing the necessary Bitcoin transactions and laneBTC transfers. It connects to both Core Lane JSON-RPC and Bitcoin RPC.
 
-**Deal Coordination**: The process by which LaneLayer coordinates trustless deals between parties without requiring them to lock Bitcoin in contracts.
+**Intent Coordination**: The process by which LaneLayer coordinates trustless intents between parties without requiring them to lock Bitcoin in contracts.
 
-**BRN1 Format**: A specific format used in Bitcoin OP_RETURN outputs for burning Bitcoin and minting laneBTC tokens.
+**IntentData**: The core data structure containing intent type and serialized intent information.
 
-**Taproot Integration**: Data storage on Bitcoin using Taproot envelopes for efficient deal coordination data.
+**AnchorBitcoinFill**: Intent type for exchanging laneBTC back to Bitcoin. Contains Bitcoin address, amount, max fee, and expiration.
 
-**laneBTC**: Bitcoin tokens minted when Bitcoin is burned, used for deal coordination without locking actual BTC.
+**UserIntent**: Complete intent state including ID, user address, Bitcoin destination, amount, fee, status, and timestamps.
 
-**Deal Settlement**: The process by which deals are settled back to Bitcoin, ensuring miners earn transaction fees.
-
-**Intent System**: A smart contract system that manages deal intents and coordinates their fulfillment.
-
-**Bitcoin Anchoring**: The process of anchoring deal coordination to Bitcoin's security without locking BTC.
-
-**Deal Locking**: The process by which a filler bot locks a deal for fulfillment to prevent double-spending.
-
-**Deal Solving**: The process by which a locked deal is fulfilled and settled back to Bitcoin.
-
-**OP_RETURN**: A Bitcoin script opcode used to store deal coordination data in Bitcoin transactions.
-
-**JSON-RPC**: A remote procedure call protocol used for communication with the Core Lane node.
-
-**CBOR**: Concise Binary Object Representation, used for serializing IntentData.
-
-**Alloy Primitives**: Ethereum-compatible libraries used for transaction parsing and contract interaction.
-
-**Consensus**: The mechanism by which Core Lane nodes agree on the state of the system.
-
-**RLP**: Recursive Length Prefix encoding used in Ethereum and Core Lane.
-
-**Sol-types**: Type definitions for Solidity contracts used in Core Lane.
+**laneBTC**: Bitcoin tokens minted when Bitcoin is burned. 1 satoshi = 10^10 wei on Core Lane.
 
 ---
 

@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="header-container">
             <div class="header-left">
@@ -44,99 +43,32 @@
             </div>
 
             <nav class="header-nav">
-                <a href="/" class="nav-link active">Documentation</a>
-                <a href="/terminology.html" class="nav-link">Terminology</a>
-                <a href="/faq.html" class="nav-link">FAQ</a>
+                <a href="/" class="nav-link{% if page.url == '/' %} active{% endif %}">Documentation</a>
+                <a href="/terminology.html" class="nav-link{% if page.url == '/terminology.html' %} active{% endif %}">Terminology</a>
+                <a href="/faq.html" class="nav-link{% if page.url == '/faq.html' %} active{% endif %}">FAQ</a>
             </nav>
         </div>
     </header>
 
-    <!-- Main Layout -->
     <div class="main-layout{% if page.layout == 'default' %} homepage{% endif %}">
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-content">
                 <div class="sidebar-section">
-                    <h3 class="sidebar-title">Getting Started</h3>
+                    <h3 class="sidebar-title">Documentation</h3>
                     <ul class="sidebar-nav">
-                        <li><a href="/docs/getting-started.html" class="sidebar-link">Quick Start</a></li>
-                        <li><a href="/docs/getting-started.html#setup" class="sidebar-link">Setup</a></li>
-                        <li><a href="/docs/getting-started.html#commands" class="sidebar-link">Commands</a></li>
-                        <li><a href="/docs/getting-started.html#troubleshooting" class="sidebar-link">Troubleshooting</a></li>
-                    </ul>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3 class="sidebar-title">Core Concepts</h3>
-                    <ul class="sidebar-nav">
-                        <li><a href="/docs/core-concepts.html" class="sidebar-link">Bitcoin Anchoring</a></li>
-                        <li><a href="/docs/core-concepts.html#intent-system" class="sidebar-link">Intent System</a></li>
-                        <li><a href="/docs/core-concepts.html#filler-bot" class="sidebar-link">Filler Bot</a></li>
-                        <li><a href="/docs/core-concepts.html#core-lane-node" class="sidebar-link">Core Lane Node</a></li>
-                    </ul>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3 class="sidebar-title">Architecture</h3>
-                    <ul class="sidebar-nav">
-                        <li><a href="/docs/architecture.html" class="sidebar-link">System Overview</a></li>
-                        <li><a href="/docs/architecture.html#bitcoin-l1" class="sidebar-link">Bitcoin L1</a></li>
-                        <li><a href="/docs/architecture.html#core-lane-node" class="sidebar-link">Core Lane Node</a></li>
-                        <li><a href="/docs/architecture.html#filler-bot" class="sidebar-link">Filler Bot</a></li>
-                        <li><a href="/docs/architecture.html#intent-system" class="sidebar-link">Intent System</a></li>
-                    </ul>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3 class="sidebar-title">Filler Bot</h3>
-                    <ul class="sidebar-nav">
-                        <li><a href="/docs/filler-bot.html" class="sidebar-link">Overview</a></li>
-                        <li><a href="/docs/filler-bot.html#commands" class="sidebar-link">Commands</a></li>
-                        <li><a href="/docs/filler-bot.html#configuration" class="sidebar-link">Configuration</a></li>
-                        <li><a href="/docs/filler-bot.html#monitoring" class="sidebar-link">Monitoring</a></li>
-                    </ul>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3 class="sidebar-title">Intent System</h3>
-                    <ul class="sidebar-nav">
-                        <li><a href="/docs/intent-system.html" class="sidebar-link">Overview</a></li>
-                        <li><a href="/docs/intent-system.html#interface" class="sidebar-link">Interface</a></li>
-                        <li><a href="/docs/intent-system.html#intent-types" class="sidebar-link">Intent Types</a></li>
-                        <li><a href="/docs/intent-system.html#lifecycle" class="sidebar-link">Lifecycle</a></li>
-                    </ul>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3 class="sidebar-title">API Reference</h3>
-                    <ul class="sidebar-nav">
-                        <li><a href="/docs/api-reference.html" class="sidebar-link">Core Lane API</a></li>
-                        <li><a href="/api/core-lane.html" class="sidebar-link">Core Lane RPC</a></li>
-                        <li><a href="/api/filler-bot.html" class="sidebar-link">Filler Bot CLI</a></li>
-                    </ul>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3 class="sidebar-title">Development</h3>
-                    <ul class="sidebar-nav">
-                        <li><a href="/docs/development.html" class="sidebar-link">Project Structure</a></li>
-                        <li><a href="/docs/development.html#building" class="sidebar-link">Building</a></li>
-                        <li><a href="/docs/development.html#testing" class="sidebar-link">Testing</a></li>
-                        <li><a href="/docs/development.html#contributing" class="sidebar-link">Contributing</a></li>
+                        <li><a href="/" class="sidebar-link">Home</a></li>
+                        <li><a href="/terminology.html" class="sidebar-link">Terminology</a></li>
+                        <li><a href="/faq.html" class="sidebar-link">FAQ</a></li>
                     </ul>
                 </div>
             </div>
         </aside>
-
-        <!-- Main Content -->
         <main class="main-content">
             <div class="content-wrapper">
                 {{ content }}
             </div>
         </main>
     </div>
-
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-left">
@@ -152,13 +84,8 @@
                             </svg>
                             GitHub
                         </a>
-                        <a href="/docs/development.html" class="footer-link">Development</a>
-                        <a href="/docs/api-reference.html" class="footer-link">API Reference</a>
-                    </div>
-                    <div class="footer-column">
-                        <a href="/docs/getting-started.html" class="footer-link">Getting Started</a>
-                        <a href="/docs/core-concepts.html" class="footer-link">Core Concepts</a>
-                        <a href="/docs/architecture.html" class="footer-link">Architecture</a>
+                        <a href="/terminology.html" class="footer-link">Terminology</a>
+                        <a href="/faq.html" class="footer-link">FAQ</a>
                     </div>
                 </div>
             </div>
@@ -287,7 +214,7 @@
                 } else if (e.key === 'Escape') {
                     e.target.value = '';
                     e.target.blur();
-                    
+
                     // Restore original content
                     const content = document.querySelector('.main-content');
                     if (originalContent && content) {
