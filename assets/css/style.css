@@ -253,7 +253,6 @@ body {
 .main-layout {
   display: flex;
   flex: 1;
-  min-height: calc(100vh - 72px);
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -333,8 +332,8 @@ body {
 .main-content {
   flex: 1;
   background: var(--bg-primary);
-  height: calc(100vh - 72px);
-  padding-bottom: 120px; /* Space for fixed footer */
+  min-height: calc(100vh - 72px);
+  padding-bottom: 0; /* Footer is now part of document flow */
 }
 
 .content-wrapper {
@@ -416,6 +415,11 @@ pre {
   -ms-user-select: text;
 }
 
+/* Extra margin for last code block to ensure visibility */
+pre:last-of-type {
+  margin-bottom: 2rem;
+}
+
 pre code {
   background: none;
   border: none;
@@ -485,23 +489,26 @@ a:hover {
   background: rgba(11, 3, 11, 0.95);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--border-color);
-  padding: 1.5rem 0;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
   width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 1rem 0;
+  min-height: 72px;
+  margin-top: auto;
 }
 
 .footer-container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 100%;
 }
 
 .footer-left {
@@ -513,14 +520,16 @@ a:hover {
 
 .footer-right {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .footer-links {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
 .footer-column {
@@ -620,12 +629,27 @@ a:hover {
 
   .footer-container {
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     padding: 0 1rem;
+    max-width: 100%;
   }
 
   .footer-links {
-    gap: 2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    padding: 0.75rem 0;
+    min-height: 72px;
+  }
+
+  .footer-left {
+    text-align: center;
   }
 
   h1 {
@@ -785,7 +809,9 @@ a:hover {
   justify-content: space-between;
   align-items: center;
   margin-top: 40px;
+  margin-bottom: 40px;
   padding-top: 20px;
+  padding-bottom: 20px;
   border-top: 1px solid var(--border-color);
 }
 
