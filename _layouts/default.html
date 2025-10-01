@@ -6,7 +6,7 @@
     <title>{{ site.title }} - {{ page.title }}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
     <link rel="alternate icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/assets/css/style.css?v=3">
+    <link rel="stylesheet" href="/assets/css/style.css?v=16">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -153,7 +153,7 @@
 
                     if (matches) {
                         element.style.display = '';
-                        element.style.backgroundColor = 'rgba(255, 107, 53, 0.1)';
+                        element.style.backgroundColor = 'rgba(255, 86, 0, 0.1)';
                         hasMatches = true;
 
                         // Highlight the search terms in the text
@@ -193,7 +193,7 @@
                     // Use word boundary regex to match whole words only
                     const escapedWord = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                     const regex = new RegExp(`\\b(${escapedWord})\\b`, 'gi');
-                    highlightedHTML = highlightedHTML.replace(regex, '<mark style="background-color: rgba(255, 107, 53, 0.3); padding: 0.1em 0.2em; border-radius: 0.2em;">$1</mark>');
+                    highlightedHTML = highlightedHTML.replace(regex, '<mark style="background-color: rgba(255, 86, 0, 0.3); padding: 0.1em 0.2em; border-radius: 0.2em;">$1</mark>');
                 });
 
                 element.innerHTML = highlightedHTML;

@@ -198,5 +198,3 @@ Exit value back to Bitcoin
 # Check your Bitcoin wallet for the received funds
 docker exec bitcoin-regtest bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin123 -rpcwallet=mine getbalance
 ```
-
-
