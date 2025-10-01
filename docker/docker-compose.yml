@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  bitcoind:
+    build: ./bitcoind
+    container_name: bitcoind
+    restart: unless-stopped
+    ports:
+      - "8332:8332"   # RPC
+      - "8333:8333"   # P2P
+      - "28332:28332" # ZMQ raw block
+      - "28333:28333" # ZMQ raw tx
+    environment:
+      - RPC_USER=${RPC_USER}
+      - RPC_PASSWORD=${RPC_PASSWORD}
+    volumes:
+      - ./volumes/bitcoind:/home/bitcoin/.bitcoin
+    networks:
+      - lane-network
+    healthcheck:
+      test: ["CMD", "bitcoin-cli", "-rpcuser=${RPC_USER}", "-rpcpassword=${RPC_PASSWORD}", "getblockchaininfo"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  core-lane:
+    image: ghcr.io/lanelayer/core-lane/core-lane:latest
+    container_name: core-lane
+    depends_on:
+      bitcoind:
+        condition: service_healthy
+    command: >
+      /app/target/release/core-lane-node start
+      --rpc-url http://bitcoind:8332
+      --rpc-user ${RPC_USER}
+      --rpc-password ${RPC_PASSWORD}
+      --start-block 916201
+      --rpc-wallet hot
+    volumes:
+      - ./volumes/core-lane:/data
+    restart: unless-stopped
+    networks:
+      - lane-network
+
+networks:
+  lane-network:
+    driver: bridge
