@@ -1034,12 +1034,10 @@ a:hover {
     display: none !important;
   }
 
-  /* Additional mobile-specific hiding for ASCII content */
-  .content-wrapper h2:nth-of-type(2),
-  .content-wrapper h2:nth-of-type(2) + .ascii-diagram,
-  .content-wrapper h2:nth-of-type(2) + .ascii-diagram + p,
-  .content-wrapper h2:nth-of-type(2) + div[class*="ascii"],
-  .content-wrapper h2:nth-of-type(2) + pre[class*="ascii"] {
+  /* Additional mobile-specific hiding for ASCII content - only hide the "How LaneLayer Works" section */
+  .content-wrapper h2:has(+ img[alt="How LaneLayer Works"]),
+  .content-wrapper h2:has(+ img[alt="How LaneLayer Works"]) + img,
+  .content-wrapper h2:has(+ img[alt="How LaneLayer Works"]) + img + p {
     display: none !important;
   }
 
