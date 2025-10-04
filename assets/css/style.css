@@ -380,10 +380,12 @@ body {
     max-width: 100% !important;
   }
 
-  /* Force text wrapping */
+  /* Force text wrapping without breaking words */
   * {
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
+    hyphens: none !important;
+    word-break: keep-all !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
   }
@@ -1081,11 +1083,12 @@ a:hover {
     box-sizing: border-box !important;
   }
 
-  /* Ensure all text wraps properly */
+  /* Ensure all text wraps properly without breaking words */
   p, h1, h2, h3, h4, h5, h6, li, span, div {
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
-    hyphens: auto !important;
+    hyphens: none !important;
+    word-break: keep-all !important;
     max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -1217,6 +1220,8 @@ a:hover {
   position: relative;
   z-index: 1;
   font-weight: 500;
+  hyphens: none;
+  word-break: keep-all;
 }
 
 .feature-grid {
