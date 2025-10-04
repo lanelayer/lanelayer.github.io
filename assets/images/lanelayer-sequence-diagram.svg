@@ -1,0 +1,101 @@
+<svg width="900" height="500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .actor-box {
+        fill: #1a202c;
+        stroke: #2d3748;
+        stroke-width: 1.5;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+      }
+      .actor-text {
+        fill: #e2e8f0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .actor-subtitle {
+        fill: #a0aec0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 11px;
+        font-weight: 400;
+      }
+      .lifeline {
+        stroke: #4a5568;
+        stroke-width: 1.5;
+        stroke-dasharray: 4,4;
+        opacity: 0.6;
+      }
+      .arrow {
+        stroke: #f6ad55;
+        stroke-width: 2.5;
+        fill: none;
+        marker-end: url(#arrowhead);
+        filter: drop-shadow(0 1px 2px rgba(246, 173, 85, 0.3));
+      }
+      .arrow-text {
+        fill: #f6ad55;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+      }
+      .title {
+        fill: #f7fafc;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
+      .background { fill: #0f1419; }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#f6ad55" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="background"/>
+
+  <!-- Title -->
+  <text x="450" y="40" text-anchor="middle" class="title">How LaneLayer Works</text>
+
+  <!-- Actors -->
+  <rect x="80" y="80" width="140" height="50" class="actor-box" rx="8"/>
+  <text x="150" y="100" text-anchor="middle" class="actor-text">Bitcoin L1</text>
+  <text x="150" y="115" text-anchor="middle" class="actor-subtitle">(Settlement)</text>
+
+  <rect x="380" y="80" width="140" height="50" class="actor-box" rx="8"/>
+  <text x="450" y="100" text-anchor="middle" class="actor-text">LaneLayer</text>
+  <text x="450" y="115" text-anchor="middle" class="actor-subtitle">(Coordination)</text>
+
+  <rect x="680" y="80" width="140" height="50" class="actor-box" rx="8"/>
+  <text x="750" y="100" text-anchor="middle" class="actor-text">Filler Bots</text>
+  <text x="750" y="115" text-anchor="middle" class="actor-subtitle">(Deal Fulfill)</text>
+
+  <!-- Lifelines -->
+  <line x1="150" y1="130" x2="150" y2="420" class="lifeline"/>
+  <line x1="450" y1="130" x2="450" y2="420" class="lifeline"/>
+  <line x1="750" y1="130" x2="750" y2="420" class="lifeline"/>
+
+  <!-- Messages -->
+  <!-- 1. Anchor Deals -->
+  <line x1="150" y1="170" x2="450" y2="170" class="arrow"/>
+  <text x="300" y="165" text-anchor="middle" class="arrow-text">1. Anchor Deals</text>
+
+  <!-- 2. Settlement Data -->
+  <line x1="450" y1="220" x2="150" y2="220" class="arrow"/>
+  <text x="300" y="215" text-anchor="middle" class="arrow-text">2. Settlement Data</text>
+
+  <!-- 3. Detect Deals -->
+  <line x1="750" y1="270" x2="450" y2="270" class="arrow"/>
+  <text x="600" y="265" text-anchor="middle" class="arrow-text">3. Detect Deals</text>
+
+  <!-- 4. Execute Deals -->
+  <line x1="450" y1="320" x2="150" y2="320" class="arrow"/>
+  <text x="300" y="315" text-anchor="middle" class="arrow-text">4. Execute Deals</text>
+
+  <!-- Additional visual elements for better design -->
+  <circle cx="150" cy="130" r="4" fill="#f6ad55"/>
+  <circle cx="450" cy="130" r="4" fill="#f6ad55"/>
+  <circle cx="750" cy="130" r="4" fill="#f6ad55"/>
+</svg>

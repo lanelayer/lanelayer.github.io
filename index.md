@@ -27,11 +27,11 @@ It's like giving Bitcoin smart superpowers without changing its core. We will la
             </svg>
             Bitcoin Anchored
         </h3>
-        <ul>
-            <li>No locked BTC in contracts</li>
-            <li>All activity settles to Bitcoin</li>
-            <li>Miner fees increase with usage</li>
-        </ul>
+        <div class="feature-content">
+            <div>No locked BTC in contracts</div>
+            <div>All activity settles to Bitcoin</div>
+            <div>Miner fees increase with usage</div>
+        </div>
     </div>
 
     <div class="feature-card">
@@ -43,11 +43,11 @@ It's like giving Bitcoin smart superpowers without changing its core. We will la
                    </svg>
                    Intent-Driven Execution
                </h3>
-               <ul>
-                   <li>Trustless swaps and lending</li>
-                   <li>Express what you want, not how</li>
-                   <li>Automated fulfillment</li>
-               </ul>
+               <div class="feature-content">
+                   <div>Trustless swaps and lending</div>
+                   <div>Express what you want, not how</div>
+                   <div>Automated fulfillment</div>
+               </div>
     </div>
 
     <div class="feature-card">
@@ -57,34 +57,17 @@ It's like giving Bitcoin smart superpowers without changing its core. We will la
             </svg>
             Developer Platform
         </h3>
-        <ul>
-            <li>Build apps tied to BTC</li>
-            <li>Ethereum-compatible</li>
-            <li>Bitcoin security</li>
-        </ul>
+        <div class="feature-content">
+            <div>Build apps tied to BTC</div>
+            <div>Ethereum-compatible</div>
+            <div>Bitcoin security</div>
+        </div>
     </div>
 </div>
 
 ## How LaneLayer Works
 
-```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Bitcoin L1    │    │   LaneLayer      │    │   Filler Bots   │
-│   (Settlement)  │    │   (Coordination) │    │   (Deal Fulfill)│
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-         │                       │                       │
-         │ 1. Anchor Deals       │                       │
-         │──────────────────────▶│                       │
-         │                       │                       │
-         │ 2. Settlement Data    │                       │
-         │◀──────────────────────│                       │
-         │                       │                       │
-         │                       │ 3. Detect Deals       │
-         │                       │◀──────────────────────│
-         │                       │                       │
-         │ 4. Execute Deals      │                       │
-         │◀──────────────────────│                       │
-```
+![How LaneLayer Works](assets/images/lanelayer-sequence-diagram.svg)
 
 **LaneLayer coordinates intents without locking BTC, settles everything back to Bitcoin.**
 
