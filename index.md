@@ -73,111 +73,88 @@ It's like giving Bitcoin smart superpowers without changing its core. We will la
 
 ## How to Use LaneLayer
 
-Bring up Core Lane node on Bitcoin
-
+**Clone and Setup**
 ```bash
-# Start Bitcoin regtest node (for development)
-docker run --rm -d --name bitcoin-regtest \
-  -p 18443:18443 -p 18444:18444 \
-  bitcoin/bitcoin:29.0 \
-  -regtest -server=1 -printtoconsole \
-  -rpcuser=bitcoin -rpcpassword=bitcoin123 \
-  -rpcallowip=0.0.0.0/0 -rpcbind=0.0.0.0 -txindex=1
-
-# Create wallet and mine blocks
-docker exec bitcoin-regtest bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin123 createwallet "mine"
-docker exec bitcoin-regtest bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin123 -rpcwallet=mine generatetoaddress 101 $(docker exec bitcoin-regtest bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin123 -rpcwallet=mine getnewaddress "" bech32)
-
-# Start Core Lane node
-./target/debug/core-lane-node start \
-  --start-block 0 \
-  --rpc-user bitcoin \
-  --rpc-password bitcoin123 \
-  --http-host 127.0.0.1 \
-  --http-port 8546
+git clone https://github.com/lanelayer/core-lane.git
+cd core-lane
 ```
 
-Get a wallet address to receive Bitcoin
-
+**Set Environment Variables**
 ```bash
-# Get Bitcoin address for receiving funds
-docker exec bitcoin-regtest bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin123 -rpcwallet=mine getnewaddress "" bech32
+export RPC_USER="your_bitcoin_rpc_user"
+export RPC_PASSWORD="your_bitcoin_rpc_password"
+export CORE_LANE_RPC_URL="http://127.0.0.1:8545"
+export BITCOIN_RPC_URL="http://127.0.0.1:8332"
+```
 
-# Get Ethereum address for Core Lane
+**Start Services**
+```bash
+docker-compose -f docker/docker-compose.yml up -d
+```
+
+**Get Bitcoin Wallet Address**
+```bash
+# Create wallet
+docker exec bitcoind bitcoin-cli -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD createwallet "hot"
+
+# Get address
+BITCOIN_ADDRESS=$(docker exec bitcoind bitcoin-cli -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD -rpcwallet=hot getnewaddress "" bech32)
+echo "Bitcoin address: $BITCOIN_ADDRESS"
+```
+
+**Send Value (using cast)**
+```bash
+# Install Foundry (if not already installed)
+curl -L https://foundry.paradigm.xyz | bash
+source ~/.bashrc && foundryup
+
+# Generate Ethereum address
 cast wallet new
+
+# Send laneBTC (requires real BTC)
+cast send --rpc-url $CORE_LANE_RPC_URL --private-key YOUR_PRIVATE_KEY RECIPIENT_ADDRESS --value 1000000000000000000 --legacy
 ```
 
-Send value using cast
-
+**Burn Real BTC to Get laneBTC**
 ```bash
-# Send ETH to your address
-cast send --private-key <PRIVATE_KEY> --value 1ether <TO_ADDRESS> --rpc-url http://127.0.0.1:8546
+cd core-lane
+./target/debug/core-lane-node burn \
+  --burn-amount 100000 \
+  --chain-id 1 \
+  --eth-address YOUR_ETH_ADDRESS \
+  --rpc-user $RPC_USER \
+  --rpc-password $RPC_PASSWORD \
+  --rpc-url $BITCOIN_RPC_URL \
+  --rpc-wallet hot
+```
+
+**Transfer laneBTC**
+```bash
+# Send laneBTC to another address
+cast send --rpc-url $CORE_LANE_RPC_URL --private-key YOUR_PRIVATE_KEY RECIPIENT_ADDRESS --value 500000000000000000 --legacy
 
 # Check balance
-cast balance <ADDRESS> --rpc-url http://127.0.0.1:8546
+cast balance --rpc-url $CORE_LANE_RPC_URL RECIPIENT_ADDRESS
 ```
 
-Burn real BTC to get laneBTC
-
+**Send Calldata and Retrieve Transaction**
 ```bash
-# Burn Bitcoin and mint laneBTC
-./target/debug/core-lane-node burn \
-  --burn-amount 1000000 \
-  --chain-id 1 \
-  --eth-address <YOUR_ETH_ADDRESS> \
-  --rpc-password bitcoin123
+# Send transaction with calldata
+TX_HASH=$(cast send --rpc-url $CORE_LANE_RPC_URL --private-key YOUR_PRIVATE_KEY TARGET_ADDRESS "0x1234567890abcdef" --legacy)
 
-# Check laneBTC balance
-cast balance <YOUR_ETH_ADDRESS> --rpc-url http://127.0.0.1:8546
+# Get transaction details
+cast rpc --rpc-url $CORE_LANE_RPC_URL eth_getTransactionByHash $TX_HASH
 ```
 
-Transfer laneBTC to another address and check it has arrived
-
+**Exit Value (Bitcoin Withdrawal)**
 ```bash
-# Transfer laneBTC to another address
-cast send <TO_ADDRESS> --value <AMOUNT> \
-  --private-key <PRIVATE_KEY> \
-  --rpc-url http://127.0.0.1:8546
-
-# Check if transfer arrived
-cast balance <TO_ADDRESS> --rpc-url http://127.0.0.1:8546
-```
-
-Send calldata tx and pick it up with eth_getTransactionByHash after seeing it in a block
-
-```bash
-# Send calldata transaction
-cast send <TARGET_CONTRACT> <CALLDATA> \
-  --private-key <PRIVATE_KEY> \
-  --rpc-url http://127.0.0.1:8546
-
-# Get transaction hash and check in block
-cast tx <TX_HASH> --rpc-url http://127.0.0.1:8546
-
-# Query using JSON-RPC
-curl -X POST -H "Content-Type: application/json" \
-  --data '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":["<TX_HASH>"],"id":1}' \
-  http://127.0.0.1:8546
-```
-
-Exit value back to Bitcoin
-
-```bash
-# Create exit intent using Core Lane CLI
+# Create exit intent
+cd core-lane
 ./target/debug/core-lane-node construct-exit-intent \
-  --bitcoin-address <YOUR_BTC_ADDRESS> \
-  --amount <LANEBTC_AMOUNT> \
-  --expire-by <TIMESTAMP>
+  --bitcoin-address $BITCOIN_ADDRESS \
+  --amount 50000000 \
+  --expire-by 1000000
 
-# Start the filler bot to fulfill intents
-./target/debug/lanelayer-filler-bot start \
-  --core-lane-url http://127.0.0.1:8546 \
-  --bitcoin-rpc-url http://127.0.0.1:18443 \
-  --bitcoin-rpc-user bitcoin \
-  --bitcoin-rpc-password bitcoin123 \
-  --bitcoin-wallet filler-bot \
-  --filler-address <FILLER_ETH_ADDRESS>
-
+# The exit intent will be processed by the intent system
 # Check your Bitcoin wallet for the received funds
-docker exec bitcoin-regtest bitcoin-cli -regtest -rpcuser=bitcoin -rpcpassword=bitcoin123 -rpcwallet=mine getbalance
 ```

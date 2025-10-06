@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaneLayer</title>
+    <style>
+        :root {
+            --text-primary: #24292f;
+            --text-secondary: #656d76;
+            --text-muted: #8b949e;
+            --border-color: #d1d9e0;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --accent-color: #0969da;
+            --accent-hover: #0860ca;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .homepage-hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f6f8fa 0%, #e1e7ef 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .homepage-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .homepage-hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .content {
+            padding: 3rem 0;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .content h2 {
+            font-size: 2rem;
+            margin: 3rem 0 1.5rem 0;
+            color: var(--text-primary);
+        }
+
+        .content h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            color: var(--text-primary);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--accent-color);
+        }
+
+        .feature-content div {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .feature-content div:last-child {
+            border-bottom: none;
+        }
+
+        pre {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        code {
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.9em;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .highlight strong {
+            color: #856404;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .homepage-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="homepage-hero">
+        <h1>LaneLayer</h1>
+        <p>Coordination layer for intent-driven execution, anchored in Bitcoin</p>
+        <p style="font-size: 1.1rem; color: var(--text-muted); margin-top: 1rem;">Making Bitcoin more useful and more secure</p>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <p>Bitcoin today is the most trusted money on the internet but it's limited: You can send and hold BTC, but building apps usually means centralized exchanges or risky bridges. Miners earn less and less from block rewards, so Bitcoin's long-term security budget is shrinking.</p>
+
+            <div class="highlight">
+                <strong>LaneLayer changes this:</strong>
+            </div>
+
+            <p>It lets people execute trustless intents, swaps, lending, betting, and payments anchored in Bitcoin without locking BTC in giant risky contracts. All of this still settles back to Bitcoin, so miners earn more transaction fees as usage grows. Developers can build distributed apps, DeFi protocols, even games all tied directly to BTC, without breaking Bitcoin's simplicity or security.</p>
+
+            <div class="highlight">
+                <strong>LaneLayer makes Bitcoin more useful (apps and DeFi) and more secure (fees for miners).</strong>
+            </div>
+
+            <p>It's like giving Bitcoin smart superpowers without changing its core. We will later extend same principles to Ethereum and other chains.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                        Bitcoin Anchored
+                    </h3>
+                    <div class="feature-content">
+                        <div>No locked BTC in contracts</div>
+                        <div>All activity settles to Bitcoin</div>
+                        <div>Miner fees increase with usage</div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <h3>
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="6"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
+                        Intent-Driven Execution
+                    </h3>
+                    <div class="feature-content">
+                        <div>Trustless swaps and lending</div>
+                        <div>Express what you want, not how</div>
+                        <div>Automated fulfillment</div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <h3>
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+                        </svg>
+                        Developer Platform
+                    </h3>
+                    <div class="feature-content">
+                        <div>Build apps tied to BTC</div>
+                        <div>Ethereum-compatible</div>
+                        <div>Bitcoin security</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>How LaneLayer Works</h2>
+            <img src="assets/images/lanelayer-sequence-diagram.svg" alt="How LaneLayer Works">
+            <p><strong>LaneLayer coordinates intents without locking BTC, settles everything back to Bitcoin.</strong></p>
+
+            <h2>How to Use LaneLayer</h2>
+
+            <h3>Prerequisites</h3>
+            <ul>
+                <li>Docker and Docker Compose installed</li>
+                <li>~1GB free disk space (pruned Bitcoin node)</li>
+                <li>Real Bitcoin for testing (optional for command verification)</li>
+            </ul>
+
+            <h3>Quick Start</h3>
+
+            <p><strong>1. Clone and Setup</strong></p>
+            <pre><code>git clone https://github.com/lanelayer/core-lane.git
+cd core-lane/docker</code></pre>
+
+            <p><strong>2. Create Environment File</strong></p>
+            <pre><code>echo "RPC_USER=bitcoin
+RPC_PASSWORD=bitcoin123" > .env</code></pre>
+
+            <p><strong>3. Start Services</strong></p>
+            <pre><code>docker-compose up -d</code></pre>
+
+            <p><em>Wait 2-4 hours for Bitcoin sync</em> (much faster with pruning enabled)</p>
+
+            <h3>Complete Core Lane Workflow</h3>
+
+            <p><strong>Step 1: Get Bitcoin Wallet Address</strong></p>
+            <pre><code># Create wallet
+docker exec bitcoind bitcoin-cli -rpcuser=bitcoin -rpcpassword=bitcoin123 createwallet "hot"
+
+# Get address
+BITCOIN_ADDRESS=$(docker exec bitcoind bitcoin-cli -rpcuser=bitcoin -rpcpassword=bitcoin123 -rpcwallet=hot getnewaddress "" bech32)
+echo "Bitcoin address: $BITCOIN_ADDRESS"</code></pre>
+
+            <p><strong>Step 2: Send Value (using cast)</strong></p>
+            <pre><code># Install Foundry (if not already installed)
+curl -L https://foundry.paradigm.xyz | bash
+source ~/.bashrc && foundryup
+
+# Generate Ethereum address
+cast wallet new
+
+# Send laneBTC (requires real BTC)
+cast send --rpc-url http://127.0.0.1:8545 --private-key YOUR_PRIVATE_KEY RECIPIENT_ADDRESS --value 1000000000000000000 --legacy</code></pre>
+
+            <p><strong>Step 3: Burn Real BTC to Get laneBTC</strong></p>
+            <pre><code>cd /home/nyakio/core-lane
+./target/debug/core-lane-node burn \
+  --burn-amount 100000 \
+  --chain-id 1 \
+  --eth-address YOUR_ETH_ADDRESS \
+  --rpc-password bitcoin123 \
+  --rpc-url http://127.0.0.1:8332 \
+  --rpc-wallet hot</code></pre>
+
+            <p><strong>Step 4: Transfer laneBTC</strong></p>
+            <pre><code># Send laneBTC to another address
+cast send --rpc-url http://127.0.0.1:8545 --private-key YOUR_PRIVATE_KEY RECIPIENT_ADDRESS --value 500000000000000000 --legacy
+
+# Check balance
+cast balance --rpc-url http://127.0.0.1:8545 RECIPIENT_ADDRESS</code></pre>
+
+            <p><strong>Step 5: Send Calldata and Retrieve Transaction</strong></p>
+            <pre><code># Send transaction with calldata
+TX_HASH=$(cast send --rpc-url http://127.0.0.1:8545 --private-key YOUR_PRIVATE_KEY TARGET_ADDRESS "0x1234567890abcdef" --legacy)
+
+# Get transaction details
+cast rpc --rpc-url http://127.0.0.1:8545 eth_getTransactionByHash $TX_HASH</code></pre>
+
+            <p><strong>Step 6: Exit Value (Bitcoin Withdrawal)</strong></p>
+            <pre><code># Create exit intent
+cd /home/nyakio/core-lane
+./target/debug/core-lane-node construct-exit-intent \
+  --bitcoin-address $BITCOIN_ADDRESS \
+  --amount 50000000 \
+  --expire-by 1000000
+
+# Use the generated CBOR data with the IntentSystem contract
+# The filler bot will automatically process the exit intent</code></pre>
+
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Pruned Bitcoin Node</strong>: Only 550MB disk usage (vs 500GB+)</li>
+                <li><strong>Fast Sync</strong>: 2-4 hours instead of 24-48 hours</li>
+                <li><strong>Real Bitcoin Support</strong>: Full mainnet compatibility</li>
+                <li><strong>Complete Workflow</strong>: All 6 steps tested and verified</li>
+            </ul>
+
+            <h3>Expected Errors (Without Real BTC)</h3>
+            <ul>
+                <li><code>Insufficient funds</code> - Normal when wallet is empty</li>
+                <li><code>No suitable unspent outputs found</code> - Normal when no BTC available</li>
+            </ul>
+
+            <h3>Troubleshooting</h3>
+            <ul>
+                <li><strong>Bitcoin sync taking long</strong>: Normal, wait for "healthy" status</li>
+                <li><strong>RPC errors</strong>: Ensure containers are running with <code>docker-compose ps</code></li>
+                <li><strong>Permission errors</strong>: Check Docker volume permissions</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
