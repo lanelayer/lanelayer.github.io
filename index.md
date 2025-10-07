@@ -71,70 +71,55 @@ It's like giving Bitcoin smart superpowers without changing its core. We will la
 
 **LaneLayer coordinates intents without locking BTC, settles everything back to Bitcoin.**
 
-## How to Use LaneLayer
+## Getting Started
 
-**Clone and Setup**
+**Quick Start**
 ```bash
+# Clone the repository
 git clone https://github.com/lanelayer/core-lane.git
 cd core-lane
-```
 
-**Set Environment Variables**
-```bash
-# Set your Bitcoin RPC credentials
-# You need to configure these with your own Bitcoin node credentials
-export RPC_USER="your_bitcoin_rpc_username"
-export RPC_PASSWORD="your_bitcoin_rpc_password"
+# Set up environment variables (uses defaults if not set)
+export RPC_USER="${RPC_USER:-bitcoin}"
+export RPC_PASSWORD="${RPC_PASSWORD:-bitcoin123}"
 export CORE_LANE_RPC_URL="http://127.0.0.1:8545"
 export BITCOIN_RPC_URL="http://127.0.0.1:8332"
+
+# Optional: Set custom credentials before running the above
+# export RPC_USER="your_username"
+# export RPC_PASSWORD="your_password"
+
+# Start the services (includes Bitcoin node)
+
+cd docker
+docker compose up --build --wait -d
+
+# Monitor the sync process
+
+docker compose logs -f bitcoind
 ```
 
-**How to Get RPC Credentials:**
+**What to Expect:**
 
-**Option 1: Use the Docker Bitcoin Node (Recommended)**
-The Docker Compose includes a Bitcoin node that automatically generates credentials. You can use these default values:
-```bash
-export RPC_USER="bitcoin"
-export RPC_PASSWORD="bitcoin123"
-```
+- Compiles Bitcoin Core from source. Only happens on first run.
 
-**Option 2: Use Your Own Bitcoin Node**
-If you have your own Bitcoin node running, check your `bitcoin.conf` file:
-```bash
-# Look for these lines in ~/.bitcoin/bitcoin.conf
-cat ~/.bitcoin/bitcoin.conf | grep rpcuser
-cat ~/.bitcoin/bitcoin.conf | grep rpcpassword
-```
+- Downloads 9GB UTXO snapshot to speed up sync.
 
-**Option 3: Create New Credentials**
-If you need to create new credentials, add them to your Bitcoin node's `bitcoin.conf`:
-```bash
-echo "rpcuser=your_username" >> ~/.bitcoin/bitcoin.conf
-echo "rpcpassword=your_secure_password" >> ~/.bitcoin/bitcoin.conf
-```
+- Containers show as "healthy" but Bitcoin is still syncing in background.
 
-**RPC URL Configuration:**
+- Bitcoin syncs to latest block. Watch progress with `docker compose logs -f bitcoind`.
 
-**For Docker Bitcoin Node (Option 1):**
-```bash
-export BITCOIN_RPC_URL="http://127.0.0.1:8332"
-```
+- Core Lane starts after Bitcoin finishes syncing.
 
-**For Your Own Bitcoin Node (Option 2 & 3):**
-```bash
-# If running locally
-export BITCOIN_RPC_URL="http://127.0.0.1:8332"
+**Troubleshooting:**
 
-# If running on a different machine
-export BITCOIN_RPC_URL="http://YOUR_BITCOIN_NODE_IP:8332"
-```
+- **"Services are healthy but not working"** - This is normal! Wait for Bitcoin to finish syncing
+- **"Bitcoin node not responding"** - Check `docker compose logs bitcoind` for sync progress
+- **"Core Lane not starting"** - It waits for Bitcoin to sync first, this is expected
+- **"Download is slow"** - The 9GB download depends on your internet speed
+- **"Build is taking long"** - First build compiles Bitcoin from source, subsequent builds are faster
 
-**Note**: The default port for Bitcoin RPC is 8332. Make sure your Bitcoin node is configured to accept RPC connections on this port.
-
-**Start Services**
-```bash
-docker-compose -f docker/docker-compose.yml up -d
-```
+## How to Use LaneLayer
 
 **Get Bitcoin Wallet Address**
 ```bash
