@@ -81,17 +81,18 @@ It's like giving Bitcoin smart superpowers without changing its core. We will la
 git clone https://github.com/lanelayer/core-lane.git
 cd core-lane
 
-# Build the Core Lane node
-cargo build
+# Build the Docker image
+docker build -t core-lane .
 
-# Create a wallet (generates mnemonic)
-./target/debug/core-lane-node create-wallet --network mainnet
+# Generate mnemonic using Docker image
+MNEMONIC=$(docker run --rm core-lane ./core-lane-node create-wallet --mnemonic-only --network mainnet)
 
-# Start the services
-RPC_USER=bitcoin RPC_PASSWORD=bitcoin123 CORE_LANE_MNEMONIC="your twelve word mnemonic phrase here" docker compose -f docker-compose.yml up --build --wait -d
+# Start the services (replace MNEMONIC with the generated phrase)
+cd docker
+RPC_USER=bitcoin RPC_PASSWORD=bitcoin123 CORE_LANE_MNEMONIC="$MNEMONIC" docker compose -f docker-compose.yml up --build --wait -d
 
 # Get your Bitcoin address
-./target/debug/core-lane-node get-address --network mainnet
+docker exec core-lane /app/core-lane-node get-address --network mainnet --data-dir /data
 ```
 
 **What to Expect:**
@@ -100,6 +101,12 @@ RPC_USER=bitcoin RPC_PASSWORD=bitcoin123 CORE_LANE_MNEMONIC="your twelve word mn
 - Much faster startup (no sync needed)
 - Core Lane starts immediately
 - Wallet database created automatically
+
+**Note:** If you get "Wallet database not found" error, create the wallet database manually:
+
+```bash
+docker exec core-lane /app/core-lane-node create-wallet --network mainnet --mnemonic "$MNEMONIC" --data-dir /data
+```
 
 **Troubleshooting:**
 
@@ -113,7 +120,7 @@ RPC_USER=bitcoin RPC_PASSWORD=bitcoin123 CORE_LANE_MNEMONIC="your twelve word mn
 
 ```bash
 # Get address from your wallet
-BITCOIN_ADDRESS=$(./target/debug/core-lane-node --plain get-address --network mainnet)
+BITCOIN_ADDRESS=$(docker exec core-lane /app/core-lane-node --plain get-address --network mainnet --data-dir /data)
 echo "Bitcoin address: $BITCOIN_ADDRESS"
 ```
 
@@ -138,18 +145,18 @@ cast send --rpc-url http://127.0.0.1:8545 --private-key YOUR_PRIVATE_KEY RECIPIE
 **Burn Real BTC to Get laneBTC**
 
 ```bash
-cd core-lane
-# Create wallet first (if not done already)
-MNEMONIC=$(./target/debug/core-lane-node --plain create-wallet --network mainnet --mnemonic-only)
+# Generate a new mnemonic for burning
+docker run --rm core-lane ./core-lane-node create-wallet --mnemonic-only --network mainnet
 
-# Burn Bitcoin to get laneBTC
-./target/debug/core-lane-node burn \
+# Burn Bitcoin to get laneBTC (replace MNEMONIC with the generated phrase)
+docker run --rm -v $(pwd):/data core-lane ./core-lane-node burn \
   --burn-amount BURN_AMOUNT \
   --chain-id CHAIN_ID \
   --eth-address YOUR_ETH_ADDRESS \
   --network mainnet \
-  --mnemonic "$MNEMONIC" \
-  --electrum-url "ssl://electrum.blockstream.info:50002"
+  --mnemonic "your twelve word mnemonic phrase here" \
+  --electrum-url "ssl://electrum.blockstream.info:50002" \
+  --data-dir /data
 ```
 
 **Transfer laneBTC**
@@ -182,11 +189,11 @@ cast rpc --rpc-url http://127.0.0.1:8545 eth_getTransactionByHash $TX_HASH
 
 ```bash
 # Create exit intent
-cd core-lane
-./target/debug/core-lane-node construct-exit-intent \
+docker exec core-lane /app/core-lane-node construct-exit-intent \
   --bitcoin-address $BITCOIN_ADDRESS \
   --amount 50000000 \
-  --expire-by 1000000
+  --expire-by 1000000 \
+  --data-dir /data
 
 # The exit intent will be processed by the intent system
 # Check your Bitcoin wallet for the received funds
