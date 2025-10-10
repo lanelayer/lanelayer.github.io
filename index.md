@@ -63,6 +63,7 @@ It's like giving Bitcoin smart superpowers without changing its core. We will la
             <div>Bitcoin security</div>
         </div>
     </div>
+
 </div>
 
 ## How LaneLayer Works
@@ -74,64 +75,50 @@ It's like giving Bitcoin smart superpowers without changing its core. We will la
 ## Getting Started
 
 **Quick Start**
+
 ```bash
 # Clone the repository
 git clone https://github.com/lanelayer/core-lane.git
 cd core-lane
 
-# Set up environment variables (uses defaults if not set)
-export RPC_USER="${RPC_USER:-bitcoin}"
-export RPC_PASSWORD="${RPC_PASSWORD:-bitcoin123}"
-export CORE_LANE_RPC_URL="http://127.0.0.1:8545"
-export BITCOIN_RPC_URL="http://127.0.0.1:8332"
+# Build the Core Lane node
+cargo build
 
-# Optional: Set custom credentials before running the above
-# export RPC_USER="your_username"
-# export RPC_PASSWORD="your_password"
+# Create a wallet (generates mnemonic)
+./target/debug/core-lane-node create-wallet --network mainnet
 
-# Start the services (includes Bitcoin node)
+# Start the services
+RPC_USER=bitcoin RPC_PASSWORD=bitcoin123 CORE_LANE_MNEMONIC="your twelve word mnemonic phrase here" docker compose -f docker-compose.yml up --build --wait -d
 
-cd docker
-docker compose up --build --wait -d
-
-# Monitor the sync process
-
-docker compose logs -f bitcoind
+# Get your Bitcoin address
+./target/debug/core-lane-node get-address --network mainnet
 ```
 
 **What to Expect:**
 
-- Compiles Bitcoin Core from source. Only happens on first run.
-
-- Downloads 9GB UTXO snapshot to speed up sync.
-
-- Containers show as "healthy" but Bitcoin is still syncing in background.
-
-- Bitcoin syncs to latest block. Watch progress with `docker compose logs -f bitcoind`.
-
-- Core Lane starts after Bitcoin finishes syncing.
+- Uses remote Bitcoin RPC (no local Bitcoin node)
+- Much faster startup (no sync needed)
+- Core Lane starts immediately
+- Wallet database created automatically
 
 **Troubleshooting:**
 
-- **"Services are healthy but not working"** - This is normal! Wait for Bitcoin to finish syncing
-- **"Bitcoin node not responding"** - Check `docker compose logs bitcoind` for sync progress
-- **"Core Lane not starting"** - It waits for Bitcoin to sync first, this is expected
-- **"Download is slow"** - The 9GB download depends on your internet speed
-- **"Build is taking long"** - First build compiles Bitcoin from source, subsequent builds are faster
+- **"Wallet database not found"** - Create a wallet first with `create-wallet`
+- **"Invalid mnemonic"** - Check your mnemonic phrase (12 or 24 words)
+- **"Services not starting"** - Check Docker logs with `docker compose logs -f core-lane`
 
 ## How to Use LaneLayer
 
 **Get Bitcoin Wallet Address**
-```bash
-# Create wallet
-docker exec bitcoind bitcoin-cli -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD createwallet "hot"
 
-# Get address
-BITCOIN_ADDRESS=$(docker exec bitcoind bitcoin-cli -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD -rpcwallet=hot getnewaddress "" bech32)
+```bash
+# Get address from your wallet
+BITCOIN_ADDRESS=$(./target/debug/core-lane-node --plain get-address --network mainnet)
 echo "Bitcoin address: $BITCOIN_ADDRESS"
 ```
 
 **Send Value (using cast)**
+
 ```bash
 # Install Foundry (if not already installed)
 curl -L https://foundry.paradigm.xyz | bash
@@ -145,51 +132,54 @@ cast wallet new
 # Replace YOUR_PRIVATE_KEY with the private key from above
 # Replace RECIPIENT_ADDRESS with the address you want to send to
 # Replace AMOUNT with the amount you want to send (in wei)
-cast send --rpc-url $CORE_LANE_RPC_URL --private-key YOUR_PRIVATE_KEY RECIPIENT_ADDRESS --value AMOUNT --legacy
+cast send --rpc-url http://127.0.0.1:8545 --private-key YOUR_PRIVATE_KEY RECIPIENT_ADDRESS --value AMOUNT --legacy
 ```
 
 **Burn Real BTC to Get laneBTC**
+
 ```bash
 cd core-lane
-# Replace YOUR_ETH_ADDRESS with the Ethereum address from 'cast wallet new' above
-# Replace BURN_AMOUNT with the amount of satoshis you want to burn
-# Replace CHAIN_ID with the chain ID (1 for mainnet)
-# This will burn Bitcoin and mint laneBTC to your Ethereum address
+# Create wallet first (if not done already)
+MNEMONIC=$(./target/debug/core-lane-node --plain create-wallet --network mainnet --mnemonic-only)
+
+# Burn Bitcoin to get laneBTC
 ./target/debug/core-lane-node burn \
   --burn-amount BURN_AMOUNT \
   --chain-id CHAIN_ID \
   --eth-address YOUR_ETH_ADDRESS \
-  --rpc-user $RPC_USER \
-  --rpc-password $RPC_PASSWORD \
-  --rpc-url $BITCOIN_RPC_URL \
-  --rpc-wallet hot
+  --network mainnet \
+  --mnemonic "$MNEMONIC" \
+  --electrum-url "ssl://electrum.blockstream.info:50002"
 ```
 
 **Transfer laneBTC**
+
 ```bash
 # Send laneBTC from your address to another address
 # Replace YOUR_PRIVATE_KEY with your private key from 'cast wallet new'
 # Replace RECIPIENT_ADDRESS with the address you want to send laneBTC to
 # Replace AMOUNT with the amount you want to send (in wei)
-cast send --rpc-url $CORE_LANE_RPC_URL --private-key YOUR_PRIVATE_KEY RECIPIENT_ADDRESS --value AMOUNT --legacy
+cast send --rpc-url http://127.0.0.1:8545 --private-key YOUR_PRIVATE_KEY RECIPIENT_ADDRESS --value AMOUNT --legacy
 
 # Check balance of the recipient address
-cast balance --rpc-url $CORE_LANE_RPC_URL RECIPIENT_ADDRESS
+cast balance --rpc-url http://127.0.0.1:8545 RECIPIENT_ADDRESS
 ```
 
 **Send Calldata and Retrieve Transaction**
+
 ```bash
 # Send transaction with calldata to a specific address
 # Replace YOUR_PRIVATE_KEY with your private key from 'cast wallet new'
 # Replace TARGET_ADDRESS with the address you want to send calldata to
 # Replace CALLDATA with your actual calldata (hex string starting with 0x)
-TX_HASH=$(cast send --rpc-url $CORE_LANE_RPC_URL --private-key YOUR_PRIVATE_KEY TARGET_ADDRESS CALLDATA --legacy)
+TX_HASH=$(cast send --rpc-url http://127.0.0.1:8545 --private-key YOUR_PRIVATE_KEY TARGET_ADDRESS CALLDATA --legacy)
 
 # Get transaction details using the transaction hash
-cast rpc --rpc-url $CORE_LANE_RPC_URL eth_getTransactionByHash $TX_HASH
+cast rpc --rpc-url http://127.0.0.1:8545 eth_getTransactionByHash $TX_HASH
 ```
 
 **Exit Value (Bitcoin Withdrawal)**
+
 ```bash
 # Create exit intent
 cd core-lane
