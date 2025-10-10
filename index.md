@@ -92,7 +92,7 @@ cd docker
 RPC_USER=bitcoin RPC_PASSWORD=bitcoin123 CORE_LANE_MNEMONIC="$MNEMONIC" docker compose -f docker-compose.yml up --build --wait -d
 
 # Get your Bitcoin address
-docker exec core-lane /app/core-lane-node get-address --network mainnet --data-dir /data
+docker compose exec core-lane /app/core-lane-node get-address --network mainnet --data-dir /data
 ```
 
 **What to Expect:**
@@ -105,7 +105,7 @@ docker exec core-lane /app/core-lane-node get-address --network mainnet --data-d
 **Note:** If you get "Wallet database not found" error, create the wallet database manually:
 
 ```bash
-docker exec core-lane /app/core-lane-node create-wallet --network mainnet --mnemonic "$MNEMONIC" --data-dir /data
+docker compose exec core-lane /app/core-lane-node create-wallet --network mainnet --mnemonic "$MNEMONIC" --data-dir /data
 ```
 
 **Troubleshooting:**
@@ -120,7 +120,7 @@ docker exec core-lane /app/core-lane-node create-wallet --network mainnet --mnem
 
 ```bash
 # Get address from your wallet
-BITCOIN_ADDRESS=$(docker exec core-lane /app/core-lane-node --plain get-address --network mainnet --data-dir /data)
+BITCOIN_ADDRESS=$(docker compose exec core-lane /app/core-lane-node --plain get-address --network mainnet --data-dir /data)
 echo "Bitcoin address: $BITCOIN_ADDRESS"
 ```
 
@@ -189,7 +189,7 @@ cast rpc --rpc-url http://127.0.0.1:8545 eth_getTransactionByHash $TX_HASH
 
 ```bash
 # Create exit intent
-docker exec core-lane /app/core-lane-node construct-exit-intent \
+docker compose exec core-lane /app/core-lane-node construct-exit-intent \
   --bitcoin-address $BITCOIN_ADDRESS \
   --amount 50000000 \
   --expire-by 1000000 \
