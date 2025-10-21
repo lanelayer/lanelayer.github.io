@@ -63,6 +63,7 @@ It's like giving Bitcoin smart superpowers without changing its core. We will la
             <div>Bitcoin security</div>
         </div>
     </div>
+
 </div>
 
 ## How LaneLayer Works
@@ -74,6 +75,7 @@ It's like giving Bitcoin smart superpowers without changing its core. We will la
 ## Getting Started
 
 **Quick Start**
+
 ```bash
 # Clone the repository
 git clone https://github.com/lanelayer/core-lane.git
@@ -118,10 +120,12 @@ docker compose logs -f bitcoind
 - **"Core Lane not starting"** - It waits for Bitcoin to sync first, this is expected
 - **"Download is slow"** - The 9GB download depends on your internet speed
 - **"Build is taking long"** - First build compiles Bitcoin from source, subsequent builds are faster
+- **"libclang not found" error when building** - Common on macOS. Run: `export LIBCLANG_PATH=$(brew --prefix llvm)/lib` then `cargo build`. Add to your shell profile (`.zshrc` or `.bashrc`) to make it permanent.
 
 ## How to Use LaneLayer
 
 **Get Bitcoin Wallet Address**
+
 ```bash
 # Create wallet
 docker exec bitcoind bitcoin-cli -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD createwallet "hot"
@@ -132,6 +136,7 @@ echo "Bitcoin address: $BITCOIN_ADDRESS"
 ```
 
 **Send Value (using cast)**
+
 ```bash
 # Install Foundry (if not already installed)
 curl -L https://foundry.paradigm.xyz | bash
@@ -149,6 +154,7 @@ cast send --rpc-url $CORE_LANE_RPC_URL --private-key YOUR_PRIVATE_KEY RECIPIENT_
 ```
 
 **Burn Real BTC to Get laneBTC**
+
 ```bash
 cd core-lane
 # Replace YOUR_ETH_ADDRESS with the Ethereum address from 'cast wallet new' above
@@ -166,6 +172,7 @@ cd core-lane
 ```
 
 **Transfer laneBTC**
+
 ```bash
 # Send laneBTC from your address to another address
 # Replace YOUR_PRIVATE_KEY with your private key from 'cast wallet new'
@@ -178,6 +185,7 @@ cast balance --rpc-url $CORE_LANE_RPC_URL RECIPIENT_ADDRESS
 ```
 
 **Send Calldata and Retrieve Transaction**
+
 ```bash
 # Send transaction with calldata to a specific address
 # Replace YOUR_PRIVATE_KEY with your private key from 'cast wallet new'
@@ -190,6 +198,7 @@ cast rpc --rpc-url $CORE_LANE_RPC_URL eth_getTransactionByHash $TX_HASH
 ```
 
 **Exit Value (Bitcoin Withdrawal)**
+
 ```bash
 # Create exit intent
 cd core-lane
