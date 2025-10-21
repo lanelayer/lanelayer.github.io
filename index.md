@@ -123,6 +123,7 @@ docker compose exec core-lane /app/core-lane-node create-wallet --network mainne
 ## How to Use LaneLayer
 
 **Get Bitcoin Wallet Address**
+
 ```bash
 # Get address from your wallet
 BITCOIN_ADDRESS=$(docker compose exec core-lane /app/core-lane-node --plain get-address --network mainnet --data-dir /data)
