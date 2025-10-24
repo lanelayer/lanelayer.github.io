@@ -78,7 +78,7 @@ It's like giving Bitcoin smart superpowers without changing its core. We will la
 
 ```bash
 # Generate (Bitcoin) mnemonic using Docker image
-MNEMONIC=$(docker run --rm ghcr.io/lanelayer/core-lane/core-lane:latest /app/core-lane-node create-wallet --mnemonic-only --network mainnet)
+MNEMONIC=$(docker run --rm ghcr.io/lanelayer/core-lane/core-lane:latest /app/core-lane-node create-wallet --plain --mnemonic-only --network mainnet)
 
 # Start the services (replace MNEMONIC with the generated phrase)
 CORE_LANE_MNEMONIC="$MNEMONIC" docker compose -f docker-compose.yml up --build --wait -d
