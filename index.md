@@ -102,6 +102,12 @@ docker compose exec core-lane /app/core-lane-node create-wallet --network mainne
 
 **Troubleshooting:**
 
+- **"Services are healthy but not working"** - This is normal! Wait for Bitcoin to finish syncing
+- **"Bitcoin node not responding"** - Check `docker compose logs bitcoind` for sync progress
+- **"Core Lane not starting"** - It waits for Bitcoin to sync first, this is expected
+- **"Download is slow"** - The 9GB download depends on your internet speed
+- **"Build is taking long"** - First build compiles Bitcoin from source, subsequent builds are faster
+- **"libclang not found" error when building** - Common on macOS. Run: `export LIBCLANG_PATH=$(brew --prefix llvm)/lib` then `cargo build`. Add to your shell profile (`.zshrc` or `.bashrc`) to make it permanent.
 - **"Wallet database not found"** - Create a wallet first with `create-wallet`
 - **"Invalid mnemonic"** - Check your mnemonic phrase (12 or 24 words)
 - **"Services not starting"** - Check Docker logs with `docker compose logs -f core-lane`
