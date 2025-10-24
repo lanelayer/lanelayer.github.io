@@ -102,9 +102,9 @@ fn main() {
 }
 ```
 
-## Writing RISC-V intent programe
+## Writing RISC-V intent program
 
-This section walks through building a minimal bare-metal RISC-V programe that can communicate with a host system. We'll create each file and explain what it does and why it's needed.
+This section walks through building a minimal bare-metal RISC-V program that can communicate with a host system. We'll create each file and explain what it does and why it's needed.
 
 ### Step 1: Set up dependencies
 
