@@ -77,19 +77,11 @@ It's like giving Bitcoin smart superpowers without changing its core. We will la
 **Quick Start**
 
 ```bash
-# Clone the repository
-git clone https://github.com/lanelayer/core-lane.git
-cd core-lane
-
-# Build the Docker image
-docker build -t core-lane .
-
-# Generate mnemonic using Docker image
-MNEMONIC=$(docker run --rm core-lane ./core-lane-node create-wallet --mnemonic-only --network mainnet)
+# Generate (Bitcoin) mnemonic using Docker image
+MNEMONIC=$(docker run --rm ghcr.io/lanelayer/core-lane/core-lane:latest /app/core-lane-node create-wallet --mnemonic-only --network mainnet)
 
 # Start the services (replace MNEMONIC with the generated phrase)
-cd docker
-RPC_USER=bitcoin RPC_PASSWORD=bitcoin123 CORE_LANE_MNEMONIC="$MNEMONIC" docker compose -f docker-compose.yml up --build --wait -d
+CORE_LANE_MNEMONIC="$MNEMONIC" docker compose -f docker-compose.yml up --build --wait -d
 
 # Get your Bitcoin address
 docker compose exec core-lane /app/core-lane-node get-address --network mainnet --data-dir /data
