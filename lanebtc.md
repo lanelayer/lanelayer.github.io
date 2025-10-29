@@ -1,11 +1,16 @@
+---
+layout: default
+title: LaneBTC
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LaneLayer - LaneBTC</title>
+    <title>{{ site.title }} - {{ page.title }}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
     <link rel="alternate icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/style.css?v=27">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -188,7 +193,7 @@
         .content-wrapper h1 {
             font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             color: var(--text-primary);
         }
 
@@ -230,6 +235,16 @@
             margin-bottom: 0.5rem;
         }
 
+        .term-entry {
+            margin-bottom: 2rem;
+        }
+
+        .term-entry strong {
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
         .highlight-box {
             background: var(--surface);
             border-left: 3px solid var(--primary-color);
@@ -264,6 +279,41 @@
         .scenario-box ul {
             margin-top: 0.5rem;
             margin-bottom: 0;
+        }
+
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .page-navigation .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--surface);
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all 0.2s;
+            border: 1px solid var(--border-color);
+        }
+
+        .page-navigation .nav-link:hover {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .nav-previous {
+            margin-right: auto;
+        }
+
+        .nav-next {
+            margin-left: auto;
         }
 
         .footer {
@@ -345,6 +395,16 @@
                 gap: 1rem;
                 text-align: center;
             }
+
+            .page-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-previous,
+            .nav-next {
+                margin: 0;
+            }
         }
     </style>
 </head>
@@ -383,7 +443,7 @@
                 <a href="/" class="nav-link">Documentation</a>
                 <a href="/terminology.html" class="nav-link">Terminology</a>
                 <a href="/riscv-intent.html" class="nav-link">RISC-V Intent</a>
-                <a href="/lanebtc.html" class="nav-link active">LaneBTC</a>
+                <a href="/lanebtc.html" class="nav-link{% if page.url == '/lanebtc.html' %} active{% endif %}">LaneBTC</a>
             </nav>
         </div>
     </header>
@@ -397,7 +457,7 @@
                         <li><a href="/" class="sidebar-link">Home</a></li>
                         <li><a href="/terminology.html" class="sidebar-link">Terminology</a></li>
                         <li><a href="/riscv-intent.html" class="sidebar-link">RISC-V Intent</a></li>
-                        <li><a href="/lanebtc.html" class="sidebar-link active">LaneBTC</a></li>
+                        <li><a href="/lanebtc.html" class="sidebar-link">LaneBTC</a></li>
                     </ul>
                 </div>
             </div>
@@ -478,6 +538,25 @@
                 <p>Just as eurodollars maintain parity with USD through market liquidity and settlement convertibility, LaneBTC maintains parity with Bitcoin through solver and filler arbitrage.</p>
 
                 <p><strong>It's Bitcoin liquidity, unbound from Bitcoin's block time.</strong></p>
+
+                <div class="page-navigation">
+                    <div class="nav-previous">
+                        <a href="/terminology.html" class="nav-link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m15 18-6-6 6-6"/>
+                            </svg>
+                            <span>Terminology</span>
+                        </a>
+                    </div>
+                    <div class="nav-next">
+                        <a href="/" class="nav-link">
+                            <span>Home</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m9 18 6-6-6-6"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
@@ -545,7 +624,7 @@
                 }
 
                 const searchWords = query.split(/\s+/).filter(word => word.length > 0).map(word => word.toLowerCase());
-                const elements = content.querySelectorAll('h1, h2, h3, h4, p, li, div.highlight-box, div.scenario-box');
+                const elements = content.querySelectorAll('h1, h2, h3, h4, p, li, div.highlight-box, div.scenario-box, div.page-navigation');
                 let hasMatches = false;
 
                 elements.forEach(element => {
