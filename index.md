@@ -13,7 +13,7 @@ Bitcoin today is the most trusted money on the internet but it's limited: You ca
 
 **LaneLayer changes this:**
 
-It lets people execute trustless intents, swaps, lending, betting, and payments anchored in Bitcoin without locking BTC in giant risky contracts. All of this still settles back to Bitcoin, so miners earn more transaction fees as usage grows. Developers can build distributed apps, DeFi protocols, even games all tied directly to BTC, without breaking Bitcoin's simplicity or security.
+It lets people execute trustless intents, swaps, lending and payments anchored in Bitcoin without locking BTC in giant risky contracts. All of this still settles back to Bitcoin, so miners earn more transaction fees as usage grows. Developers can build distributed apps, DeFi protocols, even games all tied directly to BTC, without breaking Bitcoin's simplicity or security.
 
 **LaneLayer makes Bitcoin more useful (apps and DeFi) and more secure (fees for miners).**
 
