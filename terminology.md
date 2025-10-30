@@ -5,7 +5,7 @@ title: Terminology
 
 # Terminology
 
-**LaneLayer**: A coordination layer for intent-driven execution, anchored in Bitcoin. It enables trustless swaps, lending, betting, and payments without locking BTC in risky contracts.
+**LaneLayer**: A coordination layer for intent-driven execution, anchored in Bitcoin. It enables trustless swaps, lending, and payments without locking BTC in risky contracts.
 
 **Core Lane**: A Bitcoin-anchored execution environment that processes Bitcoin burns and Core Lane DA transactions. It runs as a Rust binary (`core-lane-node`) that connects to Bitcoin RPC and provides Ethereum-compatible JSON-RPC at port 8545.
 
