@@ -114,21 +114,27 @@ body {
   font-weight: 600;
 }
 
-.logo img {
-  height: 50px;
-  width: auto;
+.logo {
+  display: flex;
+  align-items: center;
 }
 
-.logo-text {
-  font-size: 1.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-cyan) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.05em;
-  text-shadow: 0 2px 4px rgba(255, 86, 0, 0.2);
+.logo-img {
+  height: 50px;
+  width: auto;
+  display: block;
+  transition: opacity 0.2s ease;
+ }
+  
+  .logo-img:hover {
+    opacity: 0.85;
 }
+
+@media (max-width: 768px) {
+  .logo-img {
+    height: 50px;
+   }
+ } 
 
 .header-nav {
   display: flex;
