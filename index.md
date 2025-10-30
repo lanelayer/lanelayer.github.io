@@ -17,7 +17,7 @@ It lets people execute trustless intents, swaps, lending, betting, and payments 
 
 **LaneLayer makes Bitcoin more useful (apps and DeFi) and more secure (fees for miners).**
 
-It's like giving Bitcoin smart superpowers without changing its core. We will later extend same principles to Ethereum and other chains.
+It's like giving Bitcoin smart superpowers without changing its core.
 
 <div class="feature-grid">
     <div class="feature-card">
