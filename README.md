@@ -1,4 +1,4 @@
-# LaneLayer Documentation
+# LaneLayer Docs
 
 https://lanelayer.github.io/
 
