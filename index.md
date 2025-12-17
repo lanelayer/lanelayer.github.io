@@ -12,7 +12,7 @@ title: LaneLayer
 
 - Bitcoin settlement, no locked BTC in contracts
 - Intent-driven execution (swap, lend, pay) with Bitcoin security
-- Ethereum JSON-RPC so wallets and tools just work
+- Ethereum JSON-RPC compatible so wallets and tools just work
 
 ## Use LaneLayer in minutes
 ### ⚠️ This is experimental software
