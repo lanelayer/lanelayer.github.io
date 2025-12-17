@@ -34,7 +34,7 @@ Don’t risk money you can’t afford to lose.
 Use “Add network” in MetaMask:
 
 - Network name: LaneLayer
-- RPC URL: `https://rpc.lanelayer.io` (or the latest public endpoint)
+- RPC URL: `https://rpc.lanelayer.com` (or the latest public endpoint)
 - Chain ID: `1281453634`
 - Currency symbol: `laneBTC`
 
