@@ -15,15 +15,17 @@ title: LaneLayer
 - Ethereum JSON-RPC so wallets and tools just work
 
 ## Use LaneLayer in minutes
-### ⚠️ Alpha: LaneLayer is early alpha stage at this point
+### ⚠️ This is experimental software
 
 LaneLayer is live on Bitcoin mainnet.
 
-At this stage, the only guarantee is that BTC burns are honored to the specified Core Lane address.
+But, at this stage, the only guarantee is that BTC burns are honored to the specified Core Lane address in the burn transaction.
 
 State formats, bundle structure, transaction formats, gas limit calculation and execution semantics may change.
 
 Do not rely on state persistence or backward compatibility yet.
+
+Don’t risk money you can’t afford to lose.
 
 **Use at your own risk.**
 
