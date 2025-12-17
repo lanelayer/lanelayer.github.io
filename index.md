@@ -5,7 +5,7 @@ title: LaneLayer
 
 <div class="homepage-hero">
     <h1>LaneLayer</h1>
-    <p>Bitcoin-anchored execution, intent-first, Ethereum JSON-RPC</p>
+    <p>Bitcoin-anchored execution, intent-first, Ethereum JSON-RPC compatible</p>
 </div>
 
 ## Why LaneLayer
