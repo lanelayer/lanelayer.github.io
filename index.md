@@ -31,7 +31,7 @@ Use “Add network” in MetaMask:
 
 ### 3) Join the Discord and share your address
 
-- Join the LaneLayer Discord invite: https://discord.gg/Br7aunCs
+- Join the LaneLayer Discord invite: [Discord](https://discord.gg/Br7aunCs)
 - Go to the onboarding channel and click “Start Onboarding”.
 - Paste your address in the “Core Lane Address” field and submit.
 
