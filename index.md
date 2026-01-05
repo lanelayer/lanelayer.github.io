@@ -49,5 +49,9 @@ Use “Add network” in MetaMask:
 - Paste your address in the “Core Lane Address” field and submit.
 - You will receive 0.00001 laneBTC (see LaneBTC tab of this site)
 
+### 4) Send some laneBTC!
+
+- Find someone to send 0.0000001 laneBTC to in the Discord :) You'll need an address to send to
+
 
 
