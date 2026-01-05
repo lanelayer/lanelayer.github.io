@@ -47,7 +47,7 @@ Use “Add network” in MetaMask:
 - Join the LaneLayer Discord invite: [Discord](https://discord.gg/Br7aunCs)
 - Go to the onboarding channel and click “Start Onboarding”.
 - Paste your address in the “Core Lane Address” field and submit.
-
+- You will receive 0.00001 laneBTC (see LaneBTC tab of this site)
 
 
 
