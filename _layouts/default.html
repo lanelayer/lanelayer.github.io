@@ -1,241 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ site.title }} - {{ page.title }}</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3">
-    <link rel="alternate icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/assets/css/style.css?v=27">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=27" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <header class="header">
-        <div class="header-container">
-            <div class="header-left">
-                <a href="/" class="logo">
-                    <span class="logo-text">LaneLayer</span>
-                </a>
+      <div class="header-container">
+        <div class="header-left">
+          <a href="/" class="logo">
+            <span class="logo-text">LaneLayer</span>
+          </a>
 
-                <div class="header-utils">
-                    <div class="version-selector">
-                        <span>v1.0</span>
-                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <a href="https://github.com/lanelayer" class="external-link" target="_blank">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        <span class="github-text">GitHub</span>
-                    </a>
-                    <div class="search-box" id="searchBox">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"/>
-                            <path d="m21 21-4.35-4.35"/>
-                        </svg>
-                        <input type="text" placeholder="Search" class="search-input" id="searchInput">
-                    </div>
-                </div>
+          <div class="header-utils">
+            <div class="version-selector">
+              <span>v1.0</span>
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                <path
+                  d="M1 1.5L6 6.5L11 1.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
-
-
-            <nav class="header-nav" id="headerNav">
-                <a href="/" class="nav-link{% if page.url == '/' %} active{% endif %}">Documentation</a>
-                <a href="/terminology.html" class="nav-link{% if page.url == '/terminology.html' %} active{% endif %}">Terminology</a>
-            </nav>
+            <a
+              href="https://github.com/lanelayer"
+              class="external-link"
+              target="_blank"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+              <span class="github-text">GitHub</span>
+            </a>
+            <div class="search-box" id="searchBox">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Search"
+                class="search-input"
+                id="searchInput"
+              />
+            </div>
+          </div>
         </div>
+
+        <nav class="header-nav" id="headerNav">
+          <a href="/" class="nav-link{% if page.url == '/' %} active{% endif %}"
+            >Documentation</a
+          >
+          <a
+            href="/terminology.html"
+            class="nav-link{% if page.url == '/terminology.html' %} active{% endif %}"
+            >Terminology</a
+          >
+        </nav>
+      </div>
     </header>
 
-    <div class="main-layout{% if page.layout == 'default' %} homepage{% endif %}">
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-content">
-                <div class="sidebar-section">
-                    <h3 class="sidebar-title">Documentation</h3>
-                    <ul class="sidebar-nav">
-                        <li><a href="/" class="sidebar-link">Home</a></li>
-                        <li><a href="/terminology.html" class="sidebar-link">Terminology</a></li>
-                    </ul>
-                </div>
-            </div>
-        </aside>
-        <main class="main-content">
-            <div class="content-wrapper">
-                {{ content }}
-            </div>
-        </main>
+    <div
+      class="main-layout{% if page.layout == 'default' %} homepage{% endif %}"
+    >
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Documentation</h3>
+            <ul class="sidebar-nav">
+              <li><a href="/" class="sidebar-link">Home</a></li>
+              <li>
+                <a href="/terminology.html" class="sidebar-link">Terminology</a>
+              </li>
+            </ul>
+          </div>
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Tutorials</h3>
+            <ul class="sidebar-nav">
+              <li>
+                <a href="/build-first-lane" class="sidebar-link"
+                  >Build Your First Lane</a
+                >
+              </li>
+              <li>
+                <a href="/quest-first-lane" class="sidebar-link"
+                  >🏆 Lane Builder Quest</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+      <main class="main-content">
+        <div class="content-wrapper">{{ content }}</div>
+      </main>
     </div>
     <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-left">
-                <a href="/" class="footer-logo">LaneLayer</a>
-                <p class="footer-copyright">©2025 LaneLayer</p>
-            </div>
-            <div class="footer-right">
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <a href="https://github.com/lanelayer" target="_blank" class="footer-link">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                            GitHub
-                        </a>
-                        <a href="/terminology.html" class="footer-link">Terminology</a>
-                    </div>
-                </div>
-            </div>
+      <div class="footer-container">
+        <div class="footer-left">
+          <a href="/" class="footer-logo">LaneLayer</a>
+          <p class="footer-copyright">©2025 LaneLayer</p>
         </div>
+        <div class="footer-right">
+          <div class="footer-links">
+            <div class="footer-column">
+              <a
+                href="https://github.com/lanelayer"
+                target="_blank"
+                class="footer-link"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
+                  />
+                </svg>
+                GitHub
+              </a>
+              <a href="/terminology.html" class="footer-link">Terminology</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
 
     <script>
+      // Search functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        const searchBox = document.getElementById("searchBox");
+        let originalContent = null;
 
-        // Search functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('searchInput');
-            const searchBox = document.getElementById('searchBox');
-            let originalContent = null;
+        // Focus search on K key press
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "k" && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            e.preventDefault();
+            searchInput.focus();
+          }
+        });
 
-            // Focus search on K key press
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'k' && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                    e.preventDefault();
-                    searchInput.focus();
-                }
+        // Store original content on first search
+        function storeOriginalContent() {
+          if (!originalContent) {
+            const content = document.querySelector(".main-content");
+            if (content) {
+              originalContent = content.innerHTML;
+            }
+          }
+        }
+
+        // Search function
+        function performSearch(query) {
+          const content = document.querySelector(".main-content");
+
+          if (!content) return;
+
+          // Store original content if not already stored
+          storeOriginalContent();
+
+          if (query.length === 0) {
+            // Restore original content
+            if (originalContent) {
+              content.innerHTML = originalContent;
+            }
+            return;
+          }
+
+          // Split query into individual words and clean them
+          const searchWords = query
+            .split(/\s+/)
+            .filter((word) => word.length > 0)
+            .map((word) => word.toLowerCase());
+
+          // Filter content
+          const elements = content.querySelectorAll(
+            "h1, h2, h3, h4, h5, h6, p, li, div.feature-card, div.page-navigation"
+          );
+          let hasMatches = false;
+
+          elements.forEach((element) => {
+            const text = element.textContent.toLowerCase();
+
+            // Check if element contains ALL search words as whole words
+            const matches = searchWords.every((word) => {
+              // Use word boundary regex to match whole words only
+              const wordRegex = new RegExp(
+                `\\b${word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
+                "i"
+              );
+              return wordRegex.test(text);
             });
 
-            // Store original content on first search
-            function storeOriginalContent() {
-                if (!originalContent) {
-                    const content = document.querySelector('.main-content');
-                    if (content) {
-                        originalContent = content.innerHTML;
-                    }
-                }
+            if (matches) {
+              element.style.display = "";
+              element.style.backgroundColor = "rgba(255, 86, 0, 0.1)";
+              hasMatches = true;
+
+              // Highlight the search terms in the text
+              highlightSearchTerms(element, searchWords);
+            } else {
+              // Hide elements that don't match
+              element.style.display = "none";
             }
+          });
 
-            // Search function
-            function performSearch(query) {
-                const content = document.querySelector('.main-content');
+          // Show no results message if no matches
+          const noResults = document.getElementById("no-results");
+          if (noResults) {
+            noResults.remove();
+          }
 
-                if (!content) return;
-
-                // Store original content if not already stored
-                storeOriginalContent();
-
-                if (query.length === 0) {
-                    // Restore original content
-                    if (originalContent) {
-                        content.innerHTML = originalContent;
-                    }
-                    return;
-                }
-
-                // Split query into individual words and clean them
-                const searchWords = query.split(/\s+/).filter(word => word.length > 0).map(word => word.toLowerCase());
-
-                // Filter content
-                const elements = content.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, div.feature-card, div.page-navigation');
-                let hasMatches = false;
-
-                elements.forEach(element => {
-                    const text = element.textContent.toLowerCase();
-
-                    // Check if element contains ALL search words as whole words
-                    const matches = searchWords.every(word => {
-                        // Use word boundary regex to match whole words only
-                        const wordRegex = new RegExp(`\\b${word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
-                        return wordRegex.test(text);
-                    });
-
-                    if (matches) {
-                        element.style.display = '';
-                        element.style.backgroundColor = 'rgba(255, 86, 0, 0.1)';
-                        hasMatches = true;
-
-                        // Highlight the search terms in the text
-                        highlightSearchTerms(element, searchWords);
-                    } else {
-                        // Hide elements that don't match
-                        element.style.display = 'none';
-                    }
-                });
-
-                // Show no results message if no matches
-                const noResults = document.getElementById('no-results');
-                if (noResults) {
-                    noResults.remove();
-                }
-
-                if (!hasMatches) {
-                    const noResultsDiv = document.createElement('div');
-                    noResultsDiv.id = 'no-results';
-                    noResultsDiv.style.cssText = `
+          if (!hasMatches) {
+            const noResultsDiv = document.createElement("div");
+            noResultsDiv.id = "no-results";
+            noResultsDiv.style.cssText = `
                         text-align: center;
                         padding: 2rem;
                         color: var(--text-secondary);
                         font-style: italic;
                     `;
-                    noResultsDiv.textContent = `No results found for "${query}"`;
-                    content.appendChild(noResultsDiv);
-                }
-            }
+            noResultsDiv.textContent = `No results found for "${query}"`;
+            content.appendChild(noResultsDiv);
+          }
+        }
 
-            // Highlight search terms in text
-            function highlightSearchTerms(element, searchWords) {
-                const originalHTML = element.innerHTML;
-                let highlightedHTML = originalHTML;
+        // Highlight search terms in text
+        function highlightSearchTerms(element, searchWords) {
+          const originalHTML = element.innerHTML;
+          let highlightedHTML = originalHTML;
 
-                searchWords.forEach(word => {
-                    // Use word boundary regex to match whole words only
-                    const escapedWord = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                    const regex = new RegExp(`\\b(${escapedWord})\\b`, 'gi');
-                    highlightedHTML = highlightedHTML.replace(regex, '<mark style="background-color: rgba(255, 86, 0, 0.3); padding: 0.1em 0.2em; border-radius: 0.2em;">$1</mark>');
-                });
+          searchWords.forEach((word) => {
+            // Use word boundary regex to match whole words only
+            const escapedWord = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            const regex = new RegExp(`\\b(${escapedWord})\\b`, "gi");
+            highlightedHTML = highlightedHTML.replace(
+              regex,
+              '<mark style="background-color: rgba(255, 86, 0, 0.3); padding: 0.1em 0.2em; border-radius: 0.2em;">$1</mark>'
+            );
+          });
 
-                element.innerHTML = highlightedHTML;
-            }
+          element.innerHTML = highlightedHTML;
+        }
 
-            // Search functionality on input
-            searchInput.addEventListener('input', function(e) {
-                const query = e.target.value.toLowerCase().trim();
-                performSearch(query);
-            });
-
-            // Search functionality on Enter key and Escape
-            searchInput.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    const query = e.target.value.toLowerCase().trim();
-                    performSearch(query);
-                } else if (e.key === 'Escape') {
-                    e.target.value = '';
-                    e.target.blur();
-
-                    // Restore original content
-                    const content = document.querySelector('.main-content');
-                    if (originalContent && content) {
-                        content.innerHTML = originalContent;
-                    }
-                } else if (e.key === 'k' && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                    // Allow K key to work normally when typing in search
-                    return;
-                }
-            });
-
-            // Clear search when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!searchBox.contains(e.target)) {
-                    searchInput.value = '';
-                    const content = document.querySelector('.main-content');
-                    if (originalContent && content) {
-                        content.innerHTML = originalContent;
-                    }
-                }
-            });
+        // Search functionality on input
+        searchInput.addEventListener("input", function (e) {
+          const query = e.target.value.toLowerCase().trim();
+          performSearch(query);
         });
+
+        // Search functionality on Enter key and Escape
+        searchInput.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            const query = e.target.value.toLowerCase().trim();
+            performSearch(query);
+          } else if (e.key === "Escape") {
+            e.target.value = "";
+            e.target.blur();
+
+            // Restore original content
+            const content = document.querySelector(".main-content");
+            if (originalContent && content) {
+              content.innerHTML = originalContent;
+            }
+          } else if (e.key === "k" && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            // Allow K key to work normally when typing in search
+            return;
+          }
+        });
+
+        // Clear search when clicking outside
+        document.addEventListener("click", function (e) {
+          if (!searchBox.contains(e.target)) {
+            searchInput.value = "";
+            const content = document.querySelector(".main-content");
+            if (originalContent && content) {
+              content.innerHTML = originalContent;
+            }
+          }
+        });
+      });
     </script>
-</body>
+  </body>
 </html>

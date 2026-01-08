@@ -66,6 +66,15 @@ It's like giving Bitcoin smart superpowers without changing its core. We will la
 
 </div>
 
+<div class="featured-tutorial">
+    <div class="featured-content">
+        <span class="featured-badge">🚀 New Tutorial</span>
+        <h2>Build Your First Lane</h2>
+        <p>15 minutes to mainnet — Create a stateful prediction market with the K/V API and deploy to Fly.io.</p>
+        <a href="./build-first-lane" class="featured-button">Start the Tutorial →</a>
+    </div>
+</div>
+
 ## How LaneLayer Works
 
 ![How LaneLayer Works](assets/images/lanelayer-sequence-diagram.svg)
