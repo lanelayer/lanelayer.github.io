@@ -29,7 +29,7 @@ Complete all 5 objectives to finish the quest:
         <div class="quest-content">
             <h3>Install LaneLayer CLI v0.4.0+</h3>
             <code>npm install -g @lanelayer/cli</code>
-            <p>Verify with <code>lane --version</code></p>
+            <p>Verify with <code>lane</code></p>
         </div>
     </div>
     
