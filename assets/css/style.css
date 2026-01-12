@@ -1540,6 +1540,53 @@ a:hover {
   margin: 0;
 }
 
+/* When to Use LaneLayer Callout */
+.when-to-use {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 86, 0, 0.08) 0%,
+    rgba(255, 86, 0, 0.03) 100%
+  );
+  border: 1px solid rgba(255, 86, 0, 0.3);
+  border-left: 4px solid var(--accent-primary);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+}
+
+.when-to-use h3 {
+  color: var(--accent-primary);
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem 0;
+  font-weight: 600;
+}
+
+.when-to-use p {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-secondary);
+}
+
+.when-to-use ul {
+  margin: 0.75rem 0;
+  padding-left: 1.25rem;
+}
+
+.when-to-use li {
+  margin: 0.5rem 0;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.when-to-use li strong {
+  color: var(--text-primary);
+}
+
+.when-to-use p:last-child {
+  margin-bottom: 0;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
 /* Quest Page Header */
 .quest-header {
   text-align: center;

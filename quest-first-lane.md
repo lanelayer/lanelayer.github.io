@@ -11,7 +11,7 @@ title: Lane Builder Quest
 
 ## Overview
 
-Complete this quest to prove your skills and unlock exclusive benefits in the LaneLayer community.
+This quest walks you through building and deploying your first lane. You'll use the K/V API for state, deploy to Fly.io, and prove your work in Discord.
 
 **Reward:** **Lane Builder** Discord role + early access to testnet features
 

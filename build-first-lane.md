@@ -9,11 +9,24 @@ title: Build Your First Lane
     <p class="tutorial-subtitle">15 minutes to mainnet — Create a stateful prediction market with the K/V API</p>
 </div>
 
+<div class="when-to-use">
+    <h3>When to Use LaneLayer</h3>
+    <p>Build on LaneLayer if your app needs any two of these:</p>
+    <ul>
+        <li><strong>Value flows you can't fake</strong> — no rollbacks, no quiet bailouts</li>
+        <li><strong>Rules that can't change</strong> — no hot-patches, pauses, or "emergency upgrades"</li>
+        <li><strong>A backend that survives</strong> — keeps running even if the original team disappears</li>
+        <li><strong>Multi-party settlement</strong> — no operator trusted to be honest</li>
+        <li><strong>Bitcoin-denominated capital</strong> — not platform tokens</li>
+    </ul>
+    <p>If none apply, you're building a normal app.</p>
+</div>
+
 ## What You'll Build
 
-A **prediction market lane** that lets users make predictions and tracks outcomes — all with persistent state on mainnet. This example demonstrates real-world K/V patterns you'll use in production.
+You'll create a **prediction market lane** that lets users make predictions and tracks outcomes. This example uses real K/V patterns you'll use in production.
 
-**Features:**
+**You'll add:**
 
 - Submit predictions with stake amounts
 - Track prediction outcomes
