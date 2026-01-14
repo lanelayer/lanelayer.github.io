@@ -3,527 +3,220 @@ layout: default
 title: Build Your First Lane
 ---
 
-<div class="tutorial-header">
-    <span class="tutorial-badge">🚀 Vibecoder Tutorial</span>
+<div class="ai-first-hero">
     <h1>Build Your First Lane</h1>
-    <p class="tutorial-subtitle">15 minutes to mainnet — Create a stateful prediction market with the K/V API</p>
+    <p class="hero-intro">Get out your ChatGPT, Cursor or Claude Code</p>
+    <p class="hero-subtitle">We recommend opening up a new project in Cursor or Claude Code first, then paste this prompt.</p>
+    
+    <div class="copy-prompt-container">
+        <button id="copyPromptBtn" class="copy-prompt-btn" title="Copy AI prompt">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            Copy Prompt
+        </button>
+</div>
 </div>
 
-<div class="when-to-use">
-    <h3>When to Use LaneLayer</h3>
-    <p>Build on LaneLayer if your app needs any two of these:</p>
-    <ul>
-        <li><strong>Value flows you can't fake</strong> — no rollbacks, no quiet bailouts</li>
-        <li><strong>Rules that can't change</strong> — no hot-patches, pauses, or "emergency upgrades"</li>
-        <li><strong>A backend that survives</strong> — keeps running even if the original team disappears</li>
-        <li><strong>Multi-party settlement</strong> — no operator trusted to be honest</li>
-        <li><strong>Bitcoin-denominated capital</strong> — not platform tokens</li>
-    </ul>
-    <p>If none apply, you're building a normal app.</p>
-</div>
+<script>
+(function() {
+    // Get the enhanced AI prompt
+    function getAIPrompt() {
+        return `# LaneLayer Project Builder - AI Assistant
 
-## What You'll Build
+You are an expert LaneLayer developer assistant. Your role is to help users build custom lanes (Bitcoin-anchored execution environments) by asking clarifying questions and then implementing their project.
 
-You'll create a **prediction market lane** that lets users make predictions and tracks outcomes. This example uses real K/V patterns you'll use in production.
+## Journey Logging
 
-**You'll add:**
+**IMPORTANT**: Maintain a file called \`journey.log\` in the project root that tracks:
+- All questions you ask the user
+- User's responses and requirements
+- Key decisions made during development
+- Any blockers or issues encountered
+- Solutions implemented
 
-- Submit predictions with stake amounts
-- Track prediction outcomes
-- Leaderboard of top predictors
-- Persistent state across restarts
+Update \`journey.log\` after each significant interaction. This helps track progress and provides context if the user returns later.
 
----
+## Your Process
 
-## Prerequisites
+### STEP 1: CLI Installation (FIRST PRIORITY)
 
-Before starting, make sure you have:
+**Before anything else**, ensure the user has the LaneLayer CLI installed:
 
-- **Docker** installed and running
-- **Node.js 18+** installed
-- **Fly.io account** (free tier works) — [Sign up here](https://fly.io)
-
----
-
-## Step 1: Install the CLI
-
-```bash
+\`\`\`bash
 npm install -g @lanelayer/cli
-```
+\`\`\`
 
-Verify the installation:
+Verify installation:
+\`\`\`bash
+lane --help
+\`\`\`
 
-```bash
-lane
-# Should show the CLI help menu with available commands
-```
+**This is the first thing you should check and help with.** If they don't have it installed, guide them through installation before proceeding.
 
----
+**CRITICAL: Always work relative to the CLI**
+- **Always run actual CLI commands** to get up-to-date syntax: \`lane --help\`, \`lane <command> --help\`
+- **Upgrade CLI if needed**: If commands don't work or syntax seems outdated, have the user run \`npm install -g @lanelayer/cli@latest\` to get the latest version
+- **The CLI is the source of truth** - always verify commands by running them, don't rely on potentially outdated documentation
+- **Check source code** at https://github.com/lanelayer/cli if you need implementation details or current behavior
+- **Work with the actual CLI** - if something doesn't work, check the CLI version and upgrade if necessary
 
-## Step 2: Create Your Lane
+### STEP 2: Interview Phase
 
-```bash
-lane create predictions --template python
-cd predictions
-```
+Ask the user a series of questions to understand their project:
+- What type of application do they want to build? (e.g., prediction market, escrow service, voting system, NFT marketplace, etc.)
+- What are the core features and functionality?
+- What data needs to be stored persistently?
+- What are the key business rules or logic?
+- Are there any specific requirements or constraints?
+- What programming language do they prefer? (Python is the default, but other languages are supported)
 
-This creates a Python-based lane project with:
+**Log all questions and answers in journey.log**
 
-- `app.py` — Your HTTP server with K/V helpers
-- `Dockerfile` — Production-ready container configuration
-- `package.json` — Lane configuration
+### STEP 3: Implementation Phase
 
----
+Once you understand the requirements:
+- Create the lane project structure using \`lane create <project-name> --template python\`
+- Implement the core functionality using the K/V API for persistence
+- Follow patterns from the documentation URLs below
+- Ensure the code is production-ready
+- Update journey.log with implementation decisions
 
-## Step 3: Start Development Mode
+### STEP 4: Testing Phase
 
-```bash
-lane up dev
-```
+Help the user test their lane:
+- Guide them through testing the endpoints
+- Verify the K/V storage is working correctly
+- Check that the business logic functions as expected
+- Update journey.log with test results
 
-Your lane is now running at `http://localhost:8080`. The K/V service is automatically provisioned.
+## Documentation Resources
 
-> **⚠️ Port 8080 in use?** If you get a port conflict error, stop other containers using port 8080:
->
-> ```bash
-> docker ps --format "{{.Names}}: {{.Ports}}" | grep 8080
-> docker stop <container-name>
-> ```
->
-> Or use `lane prune --local` to stop all LaneLayer environments.
+Reference these documentation URLs when you need specific information:
 
-**Test it's working:**
+- **Complete Build Guide**: https://lanelayer.com/guide-reference.html
+  - Full tutorial with project setup, K/V API usage, code examples, and deployment
 
-```bash
-curl http://localhost:8080/health
-# → {"status": "OK", "service": "sample-python", ...}
-```
+- **Project Setup**: https://lanelayer.com/guide-reference.html#step-2-create-your-lane
+  - Creating lanes, project structure, templates
 
----
+- **K/V API Reference**: https://lanelayer.com/guide-reference.html#step-4-understanding-the-kv-api
+  - Persistent storage API, key naming, storage behavior
 
-## Step 4: Understanding the K/V API
+- **Debugging & Development**: https://lanelayer.com/guide-reference.html#step-3-start-development-mode
+  - Running in dev mode, testing, troubleshooting
 
-The K/V API provides simple persistent storage for your lane. Here's the complete reference:
+- **Deployment**: https://lanelayer.com/guide-reference.html#step-7-deploy-to-flyio
+  - Production builds, Fly.io deployment
 
-| Method   | Path        | Body                       | Description        |
-| -------- | ----------- | -------------------------- | ------------------ |
-| `GET`    | `/kv/<key>` | —                          | Read value for key |
-| `POST`   | `/kv/<key>` | `application/octet-stream` | Set value for key  |
-| `DELETE` | `/kv/<key>` | —                          | Delete key         |
+- **CLI Documentation - IMPORTANT**: 
+  - **Always get CLI info from the actual npm package** - run \`lane --help\`, \`lane <command> --help\` to get up-to-date command syntax and options
+  - **Check source code when needed**: https://github.com/lanelayer/cli
+  - **Reference docs**: https://github.com/lanelayer/cli/tree/main/docs (but prefer running actual commands for accuracy)
 
-### Key Naming
+**For CLI commands, always run them from the npm package to ensure you have the latest syntax and options. Don't rely on documentation that might be outdated.**
 
-Keys can include path segments for organization:
+## When User Gets Stuck
 
-```
-predictions/2024/btc-100k      # Prediction ID
-users/alice/stats              # User statistics
-leaderboard/top10              # Aggregated data
-```
+If the user seems stuck, confused, or encounters issues you cannot resolve:
 
-### Storage Behavior
+1. **First**: Try to break down the problem and provide clear, step-by-step guidance
+2. **Reference docs**: Point them to the relevant documentation URL above
+3. **If still stuck**: Direct them to the LaneLayer Discord community:
+   - Discord: https://discord.gg/F9GwH7zzJm
+   - **Prepare a well-formatted question** for them to post in Discord that includes:
+     - What they're trying to accomplish
+     - What they've tried so far
+     - The exact error message or issue they're encountering
+     - Relevant code snippets or command outputs
+     - Their CLI version (run \`lane --version\` if available)
+   - Tell them: "The LaneLayer community on Discord is very helpful. I've prepared a question for you below - copy it and post it in the appropriate channel. Someone will help you out!"
+   - Format the question clearly so it's easy to copy and paste into Discord
 
-| Environment    | Persistence                       |
-| -------------- | --------------------------------- |
-| **Dev/Test**   | Ephemeral (resets on `lane down`) |
-| **Production** | Persistent (blockchain-anchored)  |
+## Key Principles
 
----
+- **CLI installation is the first priority** - always check this first
+- **Always work relative to the CLI** - run actual commands (\`lane --help\`, \`lane <command> --help\`) to get up-to-date syntax
+- **Upgrade CLI if needed** - if commands don't work or seem outdated, upgrade with \`npm install -g @lanelayer/cli@latest\`
+- **The CLI is the source of truth** - verify everything by running actual commands, don't rely on potentially outdated documentation
+- **Check source code** at https://github.com/lanelayer/cli when you need implementation details or current behavior
+- Always use the K/V API for persistent storage
+- Follow the project structure from the documentation
+- Use the same patterns for route handlers and data management
+- Ensure code is clean, well-commented, and follows best practices
+- Test thoroughly before suggesting deployment
+- Keep journey.log updated throughout the process
+- Reference the documentation URLs at lanelayer.com when you need specific information
 
-## Step 5: Build the Prediction Market
+## Your First Message
 
-Now let's build something interesting. Open `app.py` and add these endpoints:
+Start by introducing yourself as a LaneLayer development assistant. 
 
-### Add the Prediction Endpoints
+**First, check if they have the CLI installed** - this is the most important first step. Ask them to run \`lane --help\` and help them install it if needed.
 
-First, add `uuid` to your imports at the top of `app.py` (the other imports like `datetime` and `json` are already there):
-
-```python
-import uuid
-```
-
-Then add these route handlers before `app = web.Application()`:
-
-```python
-async def create_prediction(request):
-    """
-    Create a new prediction.
-    POST /predict
-    Body: {"question": "Will BTC hit $100k?", "user": "alice", "outcome": true}
-    """
-    try:
-        data = await request.json()
-        question = data.get("question")
-        user = data.get("user")
-        outcome = data.get("outcome")  # true/false prediction
-
-        if not all([question, user, outcome is not None]):
-            return web.json_response(
-                {"error": "Missing required fields: question, user, outcome"},
-                status=400
-            )
-
-        # Generate prediction ID
-        pred_id = str(uuid.uuid4())[:8]
-
-        # Store the prediction
-        prediction = {
-            "id": pred_id,
-            "question": question,
-            "user": user,
-            "outcome": outcome,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "resolved": False
+Then explain that you'll help them build their lane by asking some questions, and that you'll keep a journey.log file to track progress. Ask the first question about what type of project they want to build. Be friendly, helpful, and thorough in gathering requirements before starting implementation.`;
+    }
+    
+    // Copy to clipboard
+    async function copyToClipboard(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+            return true;
+        } catch (err) {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                return true;
+            } catch (err) {
+                document.body.removeChild(textArea);
+                return false;
+            }
         }
-        await kv_set(f"predictions/{pred_id}", json.dumps(prediction))
-
-        # Update user's prediction count
-        user_stats = await kv_get(f"users/{user}/stats")
-        if user_stats:
-            stats = json.loads(user_stats.decode())
-            stats["total_predictions"] = stats.get("total_predictions", 0) + 1
-        else:
-            stats = {"total_predictions": 1, "correct": 0, "score": 0}
-        await kv_set(f"users/{user}/stats", json.dumps(stats))
-
-        logger.info(f"Created prediction {pred_id} by {user}")
-
-        return web.json_response({
-            "status": "ok",
-            "prediction_id": pred_id,
-            "message": f"Prediction recorded for: {question}"
-        })
-    except Exception as e:
-        logger.exception("Error creating prediction")
-        return web.json_response({"error": str(e)}, status=500)
-
-
-async def get_prediction(request):
-    """
-    Get a prediction by ID.
-    GET /predict/<id>
-    """
-    pred_id = request.match_info.get("id")
-
-    data = await kv_get(f"predictions/{pred_id}")
-    if not data:
-        return web.json_response({"error": "Prediction not found"}, status=404)
-
-    prediction = json.loads(data.decode())
-    return web.json_response(prediction)
-
-
-async def resolve_prediction(request):
-    """
-    Resolve a prediction with the actual outcome.
-    POST /predict/<id>/resolve
-    Body: {"actual_outcome": true}
-    """
-    pred_id = request.match_info.get("id")
-
-    try:
-        data = await request.json()
-        actual_outcome = data.get("actual_outcome")
-
-        if actual_outcome is None:
-            return web.json_response(
-                {"error": "Missing actual_outcome"},
-                status=400
-            )
-
-        # Get the prediction
-        pred_data = await kv_get(f"predictions/{pred_id}")
-        if not pred_data:
-            return web.json_response({"error": "Prediction not found"}, status=404)
-
-        prediction = json.loads(pred_data.decode())
-
-        if prediction.get("resolved"):
-            return web.json_response({"error": "Already resolved"}, status=400)
-
-        # Check if prediction was correct
-        was_correct = prediction["outcome"] == actual_outcome
-
-        # Update prediction
-        prediction["resolved"] = True
-        prediction["actual_outcome"] = actual_outcome
-        prediction["was_correct"] = was_correct
-        await kv_set(f"predictions/{pred_id}", json.dumps(prediction))
-
-        # Update user stats
-        user = prediction["user"]
-        user_stats = await kv_get(f"users/{user}/stats")
-        stats = json.loads(user_stats.decode()) if user_stats else {"total_predictions": 0, "correct": 0, "score": 0}
-
-        if was_correct:
-            stats["correct"] = stats.get("correct", 0) + 1
-            stats["score"] = stats.get("score", 0) + 10  # +10 for correct
-        else:
-            stats["score"] = stats.get("score", 0) - 5   # -5 for incorrect
-
-        await kv_set(f"users/{user}/stats", json.dumps(stats))
-
-        # Update leaderboard
-        await update_leaderboard(user, stats["score"])
-
-        logger.info(f"Resolved prediction {pred_id}: {'correct' if was_correct else 'incorrect'}")
-
-        return web.json_response({
-            "status": "ok",
-            "was_correct": was_correct,
-            "user_score": stats["score"]
-        })
-    except Exception as e:
-        logger.exception("Error resolving prediction")
-        return web.json_response({"error": str(e)}, status=500)
-
-
-async def update_leaderboard(user: str, score: int):
-    """Update the leaderboard with user's new score."""
-    leaderboard_data = await kv_get("leaderboard")
-    if leaderboard_data:
-        leaderboard = json.loads(leaderboard_data.decode())
-    else:
-        leaderboard = []
-
-    # Update or add user
-    found = False
-    for entry in leaderboard:
-        if entry["user"] == user:
-            entry["score"] = score
-            found = True
-            break
-
-    if not found:
-        leaderboard.append({"user": user, "score": score})
-
-    # Sort by score descending
-    leaderboard.sort(key=lambda x: x["score"], reverse=True)
-
-    # Keep top 10
-    leaderboard = leaderboard[:10]
-
-    await kv_set("leaderboard", json.dumps(leaderboard))
-
-
-async def get_leaderboard(request):
-    """
-    Get the prediction leaderboard.
-    GET /leaderboard
-    """
-    data = await kv_get("leaderboard")
-    if not data:
-        return web.json_response([])
-
-    return web.json_response(json.loads(data.decode()))
-
-
-async def get_user_stats(request):
-    """
-    Get stats for a specific user.
-    GET /users/<name>/stats
-    """
-    user = request.match_info.get("name")
-
-    data = await kv_get(f"users/{user}/stats")
-    if not data:
-        return web.json_response({"error": "User not found"}, status=404)
-
-    stats = json.loads(data.decode())
-    stats["user"] = user
-    return web.json_response(stats)
-```
-
-### Register the Routes
-
-Update the route registration near the bottom of `app.py`:
-
-```python
-app = web.Application()
-app.router.add_get("/health", health)
-app.router.add_post("/submit", submit_handler)
-app.router.add_post("/predict", create_prediction)
-app.router.add_get("/predict/{id}", get_prediction)
-app.router.add_post("/predict/{id}/resolve", resolve_prediction)
-app.router.add_get("/leaderboard", get_leaderboard)
-app.router.add_get("/users/{name}/stats", get_user_stats)
-```
-
----
-
-## Step 6: Test Your Prediction Market
-
-Restart your lane to pick up the changes (use `--force-rebuild` to ensure the container is rebuilt with your code changes):
-
-```bash
-lane down && lane up dev --force-rebuild
-```
-
-**Create some predictions:**
-
-```bash
-# Alice predicts BTC will hit $100k
-curl -X POST http://localhost:8080/predict \
-  -H "Content-Type: application/json" \
-  -d '{"question": "BTC hits $100k by Q2 2025?", "user": "alice", "outcome": true}'
-# → {"status": "ok", "prediction_id": "a1b2c3d4", ...}
-
-# Bob predicts it won't
-curl -X POST http://localhost:8080/predict \
-  -H "Content-Type: application/json" \
-  -d '{"question": "BTC hits $100k by Q2 2025?", "user": "bob", "outcome": false}'
-
-# Charlie agrees with Alice
-curl -X POST http://localhost:8080/predict \
-  -H "Content-Type: application/json" \
-  -d '{"question": "ETH flips BTC market cap?", "user": "charlie", "outcome": true}'
-```
-
-**Resolve a prediction:**
-
-```bash
-# BTC did hit $100k! Alice was right
-curl -X POST http://localhost:8080/predict/a1b2c3d4/resolve \
-  -H "Content-Type: application/json" \
-  -d '{"actual_outcome": true}'
-# → {"status": "ok", "was_correct": true, "user_score": 10}
-```
-
-**Check the leaderboard:**
-
-```bash
-curl http://localhost:8080/leaderboard
-# → [{"user": "alice", "score": 10}, ...]
-```
-
-**View user stats:**
-
-```bash
-curl http://localhost:8080/users/alice/stats
-# → {"total_predictions": 1, "correct": 1, "score": 10, "user": "alice"}
-```
-
----
-
-## Step 7: Deploy to Fly.io
-
-Now let's deploy your lane to production on Fly.io.
-
-### Export Production Build
-
-```bash
-lane export prod ./deployment
-```
-
-This creates a production-ready container in the `./deployment` directory.
-
-### Create fly.toml
-
-Create a `fly.toml` file in your project root:
-
-```toml
-app = "my-prediction-lane"
-primary_region = "iad"
-
-[build]
-  dockerfile = "deployment/Dockerfile"
-
-[env]
-  PORT = "8080"
-
-[http_service]
-  internal_port = 8080
-  force_https = true
-  auto_stop_machines = "stop"
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ["app"]
-
-[[vm]]
-  memory = "256mb"
-  cpu_kind = "shared"
-  cpus = 1
-```
-
-### Deploy to Fly.io
-
-```bash
-# Login to Fly.io (first time only)
-fly auth login
-
-# Launch the app
-fly launch --name my-prediction-lane --no-deploy
-
-# Deploy
-fly deploy
-```
-
-### Verify Deployment
-
-```bash
-# Health check
-curl https://my-prediction-lane.fly.dev/health
-# → {"status": "OK", ...}
-
-# Your prediction market is now live!
-curl -X POST https://my-prediction-lane.fly.dev/predict \
-  -H "Content-Type: application/json" \
-  -d '{"question": "LaneLayer launches on mainnet?", "user": "you", "outcome": true}'
-```
-
----
-
-## Python K/V Helper Reference
-
-The sample app includes these ready-to-use helpers:
-
-```python
-from app import kv_get, kv_set, kv_delete
-
-# Store any data
-await kv_set("users/alice/balance", "1000")
-
-# Read data (returns bytes or None)
-balance = await kv_get("users/alice/balance")
-if balance:
-    print(int(balance.decode()))  # 1000
-
-# Delete data
-await kv_delete("users/alice/balance")
-
-# Store structured data
-import json
-await kv_set("config", json.dumps({"version": 1, "enabled": True}))
-config = json.loads((await kv_get("config")).decode())
-```
-
----
-
-## Next Steps
-
-🎉 **Congratulations!** You've built and deployed your first lane to mainnet.
-
-<div class="next-steps">
-    <div class="next-step">
-        <h3>🏆 Complete the Quest</h3>
-        <p>Join our Discord and complete the Lane Builder Quest to earn the Lane Builder role.</p>
-        <a href="./quest-first-lane">→ View Quest Details</a>
-    </div>
-    <div class="next-step">
-        <h3>📚 Learn More</h3>
-        <p>Explore webhooks, intent payments, and advanced patterns.</p>
-        <a href="https://github.com/lanelayer/cli/tree/main/docs">→ CLI Documentation</a>
-    </div>
-    <div class="next-step">
-        <h3>🔗 Connect to Core Lane</h3>
-        <p>Learn how to verify payments and interact with the Bitcoin layer.</p>
-        <a href="/">→ Core Lane Integration</a>
-    </div>
-</div>
-
----
-
-<div class="page-navigation">
-    <a href="/" class="nav-prev">← Back to Home</a>
-    <a href="./quest-first-lane" class="nav-next">Lane Builder Quest →</a>
-</div>
+    }
+    
+    // Show feedback message
+    function showFeedback(button, message) {
+        const originalText = button.innerHTML;
+        button.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> ' + message;
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    
+    // Setup copy prompt button
+    const copyPromptBtn = document.getElementById('copyPromptBtn');
+    if (copyPromptBtn) {
+        copyPromptBtn.addEventListener('click', async function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            try {
+                const fullPrompt = getAIPrompt();
+                
+                const success = await copyToClipboard(fullPrompt);
+                
+                if (success) {
+                    showFeedback(copyPromptBtn, 'Copied!');
+                } else {
+                    console.error('Clipboard copy failed');
+                    prompt('Copy this text:', fullPrompt);
+                }
+            } catch (error) {
+                console.error('Error copying prompt:', error);
+                alert('Error copying prompt. Check console for details.');
+            }
+        });
+    }
+})();
+</script>
