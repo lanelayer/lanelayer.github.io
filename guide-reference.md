@@ -499,6 +499,6 @@ config = json.loads((await kv_get("config")).decode())
 ## Additional Resources
 
 - [CLI Documentation](https://github.com/lanelayer/cli/tree/main/docs)
-- [LaneLayer Discord](https://discord.gg/nemqRReH) - Get help and share your projects
+- [LaneLayer Discord](https://discord.gg/F9GwH7zzJm) - Get help and share your projects
 - [Terminology Guide](./terminology.html) - Key concepts explained
 - [LaneBTC Guide](./lanebtc.html) - Understanding the BTC peg

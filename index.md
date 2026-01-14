@@ -15,6 +15,7 @@ title: LaneLayer
 - Ethereum JSON-RPC compatible so wallets and tools just work
 
 ## Use LaneLayer in minutes
+
 ### ⚠️ This is experimental software
 
 LaneLayer is live on Bitcoin mainnet.
@@ -44,7 +45,7 @@ Use “Add network” in MetaMask:
 
 ### 3) Join the Discord and share your address
 
-- Join the LaneLayer Discord invite: [Discord](https://discord.gg/nemqRReH)
+- Join the LaneLayer Discord invite: [Discord](https://discord.gg/F9GwH7zzJm)
 - Go to the onboarding channel and click “Start Onboarding”.
 - Paste your address in the “Core Lane Address” field and submit.
 - You will receive 0.00001 laneBTC (see LaneBTC tab of this site)
@@ -52,6 +53,3 @@ Use “Add network” in MetaMask:
 ### 4) Send some laneBTC!
 
 - Find someone to send 0.0000001 laneBTC to in the Discord :) You'll need an address to send to
-
-
-

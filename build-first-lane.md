@@ -125,7 +125,7 @@ If the user seems stuck, confused, or encounters issues you cannot resolve:
 1. **First**: Try to break down the problem and provide clear, step-by-step guidance
 2. **Reference docs**: Point them to the relevant documentation URL above
 3. **If still stuck**: Direct them to the LaneLayer Discord community:
-   - Discord: https://discord.gg/nemqRReH
+   - Discord: https://discord.gg/F9GwH7zzJm
    - **Prepare a well-formatted question** for them to post in Discord that includes:
      - What they're trying to accomplish
      - What they've tried so far
