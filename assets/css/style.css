@@ -140,19 +140,24 @@ body {
 
 .header-nav {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
+  flex-wrap: nowrap;
+  overflow: visible;
 }
 
 .nav-link {
   color: var(--text-muted);
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.9rem;
-  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.75rem;
   border-radius: var(--radius);
   transition: all 0.3s ease;
   position: relative;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1.2;
 }
 
 .nav-link:hover,
