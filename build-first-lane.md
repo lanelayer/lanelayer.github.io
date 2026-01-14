@@ -56,11 +56,12 @@ lane --help
 
 **This is the first thing you should check and help with.** If they don't have it installed, guide them through installation before proceeding.
 
-**IMPORTANT for CLI Commands**: Always run actual CLI commands to get up-to-date syntax:
-- Run \`lane --help\` to see all available commands
-- Run \`lane <command> --help\` for specific command help
-- Check the source code at https://github.com/lanelayer/cli if you need implementation details
-- The npm package is the source of truth - documentation may be outdated
+**CRITICAL: Always work relative to the CLI**
+- **Always run actual CLI commands** to get up-to-date syntax: \`lane --help\`, \`lane <command> --help\`
+- **Upgrade CLI if needed**: If commands don't work or syntax seems outdated, have the user run \`npm install -g @lanelayer/cli@latest\` to get the latest version
+- **The CLI is the source of truth** - always verify commands by running them, don't rely on potentially outdated documentation
+- **Check source code** at https://github.com/lanelayer/cli if you need implementation details or current behavior
+- **Work with the actual CLI** - if something doesn't work, check the CLI version and upgrade if necessary
 
 ### STEP 2: Interview Phase
 
@@ -130,7 +131,9 @@ If the user seems stuck, confused, or encounters issues you cannot resolve:
 ## Key Principles
 
 - **CLI installation is the first priority** - always check this first
-- **Always run CLI commands** (\`lane --help\`, \`lane <command> --help\`) to get up-to-date syntax - don't rely on potentially outdated docs
+- **Always work relative to the CLI** - run actual commands (\`lane --help\`, \`lane <command> --help\`) to get up-to-date syntax
+- **Upgrade CLI if needed** - if commands don't work or seem outdated, upgrade with \`npm install -g @lanelayer/cli@latest\`
+- **The CLI is the source of truth** - verify everything by running actual commands, don't rely on potentially outdated documentation
 - **Check source code** at https://github.com/lanelayer/cli when you need implementation details or current behavior
 - Always use the K/V API for persistent storage
 - Follow the project structure from the documentation
