@@ -24,139 +24,101 @@ title: Build Your First Lane
 (function() {
     // Get the enhanced AI prompt
     function getAIPrompt() {
-        return `# LaneLayer Project Builder - AI Assistant
+        return `# Build My Lane
 
-You are an expert LaneLayer developer assistant. Your role is to help users build custom lanes (Bitcoin-anchored execution environments) by asking clarifying questions and then implementing their project.
+I want to build a lane on LaneLayer - a Bitcoin-anchored execution environment. Help me figure out what to build and then implement it.
 
-## Journey Logging
+## Keep a journey log
 
-**IMPORTANT**: Maintain a file called \`journey.log\` in the project root that tracks:
-- All questions you ask the user
-- User's responses and requirements
-- Key decisions made during development
-- Any blockers or issues encountered
-- Solutions implemented
+Maintain a \`journey.log\` file in my project root throughout our session. Track:
+- All questions you ask me and my responses
+- Key decisions we make during development
+- Any blockers or issues we encounter
+- Solutions we implement
 
-Update \`journey.log\` after each significant interaction. This helps track progress and provides context if the user returns later.
+Update it after each significant interaction - helps if I step away and come back later.
 
-## Your Process
+## Step 1: Interview me first
 
-### STEP 1: CLI Installation (FIRST PRIORITY)
+Ask me questions to understand my project:
+- What type of application do I want to build? (prediction market, escrow service, voting system, NFT marketplace, etc.)
+- What are the core features and functionality I need?
+- What data needs to be stored persistently?
+- What are the key business rules or logic?
+- Are there any specific requirements or constraints?
+- What programming language do I prefer? (Python is the default, but other languages work)
 
-**Before anything else**, ensure the user has the LaneLayer CLI installed:
+Log all my answers in journey.log.
 
-\`\`\`bash
-npm install -g @lanelayer/cli
-\`\`\`
+## Step 2: Check my CLI
 
-Verify installation:
+Once we know what we're building, make sure I have the LaneLayer CLI installed. Have me run:
+
 \`\`\`bash
 lane --help
 \`\`\`
 
-**This is the first thing you should check and help with.** If they don't have it installed, guide them through installation before proceeding.
+If it doesn't work, help me install it:
+\`\`\`bash
+npm install -g @lanelayer/cli
+\`\`\`
 
-**CRITICAL: Always work relative to the CLI**
-- **Always run actual CLI commands** to get up-to-date syntax: \`lane --help\`, \`lane <command> --help\`
-- **Upgrade CLI if needed**: If commands don't work or syntax seems outdated, have the user run \`npm install -g @lanelayer/cli@latest\` to get the latest version
-- **The CLI is the source of truth** - always verify commands by running them, don't rely on potentially outdated documentation
-- **Check source code** at https://github.com/lanelayer/cli if you need implementation details or current behavior
-- **Work with the actual CLI** - if something doesn't work, check the CLI version and upgrade if necessary
+**Important CLI rules:**
+- Always run actual CLI commands (\`lane --help\`, \`lane <command> --help\`) to get current syntax
+- If commands don't work or seem outdated, have me upgrade: \`npm install -g @lanelayer/cli@latest\`
+- The CLI is the source of truth - don't rely on potentially stale documentation
+- Check the source at https://github.com/lanelayer/cli if you need implementation details
 
-### STEP 2: Interview Phase
+## Step 3: Build it
 
-Ask the user a series of questions to understand their project:
-- What type of application do they want to build? (e.g., prediction market, escrow service, voting system, NFT marketplace, etc.)
-- What are the core features and functionality?
-- What data needs to be stored persistently?
-- What are the key business rules or logic?
-- Are there any specific requirements or constraints?
-- What programming language do they prefer? (Python is the default, but other languages are supported)
-
-**Log all questions and answers in journey.log**
-
-### STEP 3: Implementation Phase
-
-Once you understand the requirements:
-- Create the lane project structure using \`lane create <project-name> --template python\`
+Once you understand my requirements:
+- Create the lane project with \`lane create <project-name> --template python\`
 - Implement the core functionality using the K/V API for persistence
-- Follow patterns from the documentation URLs below
-- Ensure the code is production-ready
+- Follow patterns from the documentation
+- Make sure the code is production-ready
 - Update journey.log with implementation decisions
 
-### STEP 4: Testing Phase
+## Step 4: Help me test
 
-Help the user test their lane:
-- Guide them through testing the endpoints
-- Verify the K/V storage is working correctly
-- Check that the business logic functions as expected
-- Update journey.log with test results
+Guide me through:
+- Testing all the endpoints
+- Verifying K/V storage works correctly
+- Checking that the business logic functions as expected
 
-## Documentation Resources
+Update journey.log with test results.
 
-Reference these documentation URLs when you need specific information:
+## Docs you can reference
 
-- **Complete Build Guide**: https://lanelayer.com/guide-reference.html
-  - Full tutorial with project setup, K/V API usage, code examples, and deployment
-
+- **Complete Build Guide**: https://lanelayer.com/guide-reference.html (full tutorial with project setup, K/V API usage, code examples, and deployment)
 - **Project Setup**: https://lanelayer.com/guide-reference.html#step-2-create-your-lane
-  - Creating lanes, project structure, templates
-
 - **K/V API Reference**: https://lanelayer.com/guide-reference.html#step-4-understanding-the-kv-api
-  - Persistent storage API, key naming, storage behavior
-
 - **Debugging & Development**: https://lanelayer.com/guide-reference.html#step-3-start-development-mode
-  - Running in dev mode, testing, troubleshooting
-
 - **Deployment**: https://lanelayer.com/guide-reference.html#step-7-deploy-to-flyio
-  - Production builds, Fly.io deployment
+- **CLI Source**: https://github.com/lanelayer/cli
 
-- **CLI Documentation - IMPORTANT**: 
-  - **Always get CLI info from the actual npm package** - run \`lane --help\`, \`lane <command> --help\` to get up-to-date command syntax and options
-  - **Check source code when needed**: https://github.com/lanelayer/cli
-  - **Reference docs**: https://github.com/lanelayer/cli/tree/main/docs (but prefer running actual commands for accuracy)
+## If we get stuck
 
-**For CLI commands, always run them from the npm package to ensure you have the latest syntax and options. Don't rely on documentation that might be outdated.**
+If I seem stuck or we hit issues you can't resolve:
 
-## When User Gets Stuck
+1. First, break down the problem and give me clear step-by-step guidance
+2. Point me to the relevant documentation above
+3. If still stuck, help me post in the LaneLayer Discord (https://discord.gg/F9GwH7zzJm):
+   - Draft a well-formatted question for me that includes what I'm trying to do, what I've tried, the exact error, relevant code, and my CLI version
+   - Format it so I can just copy and paste it into Discord
 
-If the user seems stuck, confused, or encounters issues you cannot resolve:
+## Key things to remember
 
-1. **First**: Try to break down the problem and provide clear, step-by-step guidance
-2. **Reference docs**: Point them to the relevant documentation URL above
-3. **If still stuck**: Direct them to the LaneLayer Discord community:
-   - Discord: https://discord.gg/F9GwH7zzJm
-   - **Prepare a well-formatted question** for them to post in Discord that includes:
-     - What they're trying to accomplish
-     - What they've tried so far
-     - The exact error message or issue they're encountering
-     - Relevant code snippets or command outputs
-     - Their CLI version (run \`lane --version\` if available)
-   - Tell them: "The LaneLayer community on Discord is very helpful. I've prepared a question for you below - copy it and post it in the appropriate channel. Someone will help you out!"
-   - Format the question clearly so it's easy to copy and paste into Discord
-
-## Key Principles
-
-- **CLI installation is the first priority** - always check this first
-- **Always work relative to the CLI** - run actual commands (\`lane --help\`, \`lane <command> --help\`) to get up-to-date syntax
-- **Upgrade CLI if needed** - if commands don't work or seem outdated, upgrade with \`npm install -g @lanelayer/cli@latest\`
-- **The CLI is the source of truth** - verify everything by running actual commands, don't rely on potentially outdated documentation
-- **Check source code** at https://github.com/lanelayer/cli when you need implementation details or current behavior
+- CLI installation is always the first priority
 - Always use the K/V API for persistent storage
 - Follow the project structure from the documentation
 - Use the same patterns for route handlers and data management
-- Ensure code is clean, well-commented, and follows best practices
+- Keep the code clean, well-commented, and following best practices
 - Test thoroughly before suggesting deployment
-- Keep journey.log updated throughout the process
-- Reference the documentation URLs at lanelayer.com when you need specific information
+- Keep journey.log updated throughout
 
-## Your First Message
+## Start now
 
-Start by introducing yourself as a LaneLayer development assistant. 
-
-**First, check if they have the CLI installed** - this is the most important first step. Ask them to run \`lane --help\` and help them install it if needed.
-
-Then explain that you'll help them build their lane by asking some questions, and that you'll keep a journey.log file to track progress. Ask the first question about what type of project they want to build. Be friendly, helpful, and thorough in gathering requirements before starting implementation.`;
+Ask me what I want to build.`;
     }
     
     // Copy to clipboard
