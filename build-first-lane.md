@@ -22,8 +22,20 @@ title: Build Your First Lane
 
 <script>
 (function() {
-    // Get the enhanced AI prompt
-    function getAIPrompt() {
+    var ANALYTICS_API = 'https://helper.lanelayer.com/api/v1';
+
+    // Get or create anonymous user ID
+    function getOrCreateUserId() {
+        var userId = localStorage.getItem('ll_user_id');
+        if (!userId) {
+            userId = 'web_' + crypto.randomUUID();
+            localStorage.setItem('ll_user_id', userId);
+        }
+        return userId;
+    }
+
+    // Static fallback prompt (used when backend is unavailable)
+    function getStaticPrompt() {
         return `# Build My Lane
 
 I want to build a lane on LaneLayer - a Bitcoin-anchored execution environment. Help me figure out what to build and then implement it.
@@ -120,7 +132,39 @@ If I seem stuck or we hit issues you can't resolve:
 
 Ask me what I want to build.`;
     }
-    
+
+    // Fetch prompt with tracking from backend, fallback to static
+    async function getPromptWithTracking() {
+        try {
+            var resp = await fetch(ANALYTICS_API + '/prompt/latest');
+            if (resp.ok) {
+                var data = await resp.json();
+                return { content: data.content, sessionId: data.session_id, version: data.version };
+            }
+        } catch (e) {
+            // Backend unavailable, use static prompt
+        }
+        return { content: getStaticPrompt(), sessionId: null, version: 'static' };
+    }
+
+    // Track copy event (non-blocking)
+    function trackCopyEvent(userId, sessionId, version) {
+        fetch(ANALYTICS_API + '/events', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                event_type: 'copy_prompt',
+                user_id: userId,
+                session_id: sessionId,
+                data: {
+                    prompt_version: version,
+                    source: window.location.pathname,
+                    referrer: document.referrer
+                }
+            })
+        }).catch(function() {});
+    }
+
     // Copy to clipboard
     async function copyToClipboard(text) {
         try {
@@ -128,7 +172,7 @@ Ask me what I want to build.`;
             return true;
         } catch (err) {
             // Fallback for older browsers
-            const textArea = document.createElement('textarea');
+            var textArea = document.createElement('textarea');
             textArea.value = text;
             textArea.style.position = 'fixed';
             textArea.style.opacity = '0';
@@ -144,39 +188,46 @@ Ask me what I want to build.`;
             }
         }
     }
-    
+
     // Show feedback message
     function showFeedback(button, message) {
-        const originalText = button.innerHTML;
+        var originalText = button.innerHTML;
         button.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> ' + message;
         button.classList.add('copied');
-        setTimeout(() => {
+        setTimeout(function() {
             button.innerHTML = originalText;
             button.classList.remove('copied');
         }, 2000);
     }
-    
+
     // Setup copy prompt button
-    const copyPromptBtn = document.getElementById('copyPromptBtn');
+    var copyPromptBtn = document.getElementById('copyPromptBtn');
     if (copyPromptBtn) {
         copyPromptBtn.addEventListener('click', async function(e) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             try {
-                const fullPrompt = getAIPrompt();
-                
-                const success = await copyToClipboard(fullPrompt);
-                
+                var userId = getOrCreateUserId();
+                var prompt = await getPromptWithTracking();
+
+                var success = await copyToClipboard(prompt.content);
+
                 if (success) {
                     showFeedback(copyPromptBtn, 'Copied!');
+                    trackCopyEvent(userId, prompt.sessionId, prompt.version);
                 } else {
                     console.error('Clipboard copy failed');
-                    prompt('Copy this text:', fullPrompt);
+                    window.prompt('Copy this text:', prompt.content);
                 }
             } catch (error) {
                 console.error('Error copying prompt:', error);
-                alert('Error copying prompt. Check console for details.');
+                // Fallback to static prompt
+                var fallback = getStaticPrompt();
+                var fallbackSuccess = await copyToClipboard(fallback);
+                if (fallbackSuccess) {
+                    showFeedback(copyPromptBtn, 'Copied!');
+                }
             }
         });
     }
