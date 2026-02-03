@@ -1,0 +1,114 @@
+.use-in-minutes {
+  padding: 80px 0;
+  border-top: 1px solid rgba(158, 163, 175, 0.15);
+}
+
+.uim-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white-smoke);
+  margin: 0 0 1.5rem;
+}
+
+.uim-warning {
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+  background: rgba(255, 107, 0, 0.1);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  border-radius: 8px;
+  color: var(--ash);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.uim-warning strong {
+  color: var(--signal-orange);
+}
+
+.uim-step {
+  margin-bottom: 2.5rem;
+}
+
+.uim-step h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--white-smoke);
+  margin: 0 0 0.5rem;
+}
+
+.uim-step p {
+  margin: 0 0 1rem;
+  color: var(--ash);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.copy-prompt-block {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(11, 11, 11, 0.6);
+  border: 1px solid rgba(158, 163, 175, 0.2);
+  border-radius: 8px;
+}
+
+.copy-prompt-text {
+  margin: 0 0 1rem;
+  font-family: ui-monospace, monospace;
+  font-size: 0.875rem;
+  color: var(--white-smoke);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.copy-prompt-btn {
+  font-size: 0.9rem;
+  padding: 8px 16px;
+}
+
+.copy-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.copy-block {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 0.75rem;
+  background: rgba(158, 163, 175, 0.08);
+  border-radius: 6px;
+  font-size: 0.875rem;
+}
+
+.copy-label {
+  color: var(--ash);
+  flex-shrink: 0;
+}
+
+.copy-value {
+  color: var(--electric-cyan);
+  font-family: ui-monospace, monospace;
+  word-break: break-all;
+}
+
+.copy-btn {
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--electric-cyan);
+  background: transparent;
+  border: 1px solid rgba(0, 224, 255, 0.4);
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.copy-btn:hover {
+  background: rgba(0, 224, 255, 0.1);
+}
+
+.uim-step-discord .discord-cta {
+  margin-top: 0.5rem;
+}
