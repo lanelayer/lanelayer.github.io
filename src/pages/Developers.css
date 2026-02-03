@@ -1,0 +1,46 @@
+.developers-page {
+  padding: 80px 0 120px;
+}
+
+.developers-page h1 {
+  margin-bottom: 1rem;
+}
+
+.developers-page .lead {
+  font-size: 1.25rem;
+  color: var(--ash);
+  max-width: 640px;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+.dev-section {
+  margin-bottom: 2.5rem;
+}
+
+.dev-section h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--white-smoke);
+  margin: 0 0 1rem;
+}
+
+.dev-section p {
+  margin: 0;
+  color: var(--ash);
+  line-height: 1.7;
+}
+
+.checklist {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: var(--ash);
+  line-height: 1.8;
+}
+
+.dev-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 3rem;
+}

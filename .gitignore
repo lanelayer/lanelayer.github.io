@@ -25,6 +25,6 @@ Thumbs.db
 *.tmp
 *.temp
 
-
-
-
+# Vite / Node
+dist/
+node_modules/
