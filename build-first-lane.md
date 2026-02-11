@@ -8,7 +8,7 @@ title: Build Your First Lane
     <p class="hero-intro">Get out your ChatGPT, Cursor or Claude Code</p>
     <p class="hero-subtitle">We recommend opening up a new project in Cursor or Claude Code first, then paste this prompt.</p>
     
-    <div class="copy-prompt-container">
+    <div class="copy-prompt-container" data-analytics-base="https://helper.lanelayer.com">
         <button id="copyPromptBtn" class="copy-prompt-btn" title="Copy AI prompt">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -22,8 +22,22 @@ title: Build Your First Lane
 
 <script>
 (function() {
-    // Get the enhanced AI prompt
-    function getAIPrompt() {
+    var container = document.querySelector('.copy-prompt-container');
+    var ANALYTICS_BASE = (container && container.getAttribute('data-analytics-base')) || 'https://helper.lanelayer.com';
+    var USER_ID_KEY = 'lanelayer_web_user_id';
+    var state = { content: null, sessionId: null, version: null, userId: null };
+
+    function getOrCreateUserId() {
+        try {
+            var id = localStorage.getItem(USER_ID_KEY);
+            if (id) return id;
+            id = 'web_' + Math.random().toString(36).slice(2) + '_' + Date.now().toString(36);
+            localStorage.setItem(USER_ID_KEY, id);
+            return id;
+        } catch (e) { return 'web_' + Date.now(); }
+    }
+
+    function getFallbackPrompt() {
         return `# Build My Lane
 
 I want to build a lane on LaneLayer - a Bitcoin-anchored execution environment. Help me figure out what to build and then implement it.
@@ -120,58 +134,92 @@ If I seem stuck or we hit issues you can't resolve:
 
 Ask me what I want to build.`;
     }
-    
-    // Copy to clipboard
+
+    function applyPlaceholders(text, sessionId, userId) {
+        if (!text) return text;
+        return text.replace(/\{\{SESSION_ID\}\}/g, sessionId || 'none').replace(/\{\{USER_ID\}\}/g, userId || '');
+    }
+
+    function getFullPrompt() {
+        var userId = state.userId || getOrCreateUserId();
+        state.userId = userId;
+        if (state.content != null)
+            return applyPlaceholders(state.content, state.sessionId, userId);
+        return getFallbackPrompt();
+    }
+
+    function fetchPrompt() {
+        state.userId = getOrCreateUserId();
+        return fetch(ANALYTICS_BASE + '/api/v1/prompt/latest', { method: 'GET' })
+            .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+            .then(function(data) {
+                state.content = data.content;
+                state.sessionId = data.session_id;
+                state.version = data.version;
+                return state;
+            })
+            .catch(function() { return null; });
+    }
+
+    function sendCopyEvent() {
+        if (!state.sessionId || !state.userId) return Promise.resolve();
+        return fetch(ANALYTICS_BASE + '/api/v1/events', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                event_type: 'copy_prompt',
+                user_id: state.userId,
+                session_id: state.sessionId,
+                data: state.version ? { prompt_version: state.version } : {}
+            })
+        }).catch(function() {});
+    }
+
     async function copyToClipboard(text) {
         try {
             await navigator.clipboard.writeText(text);
             return true;
         } catch (err) {
-            // Fallback for older browsers
-            const textArea = document.createElement('textarea');
+            var textArea = document.createElement('textarea');
             textArea.value = text;
             textArea.style.position = 'fixed';
             textArea.style.opacity = '0';
             document.body.appendChild(textArea);
             textArea.select();
             try {
-                document.execCommand('copy');
+                var ok = document.execCommand('copy');
                 document.body.removeChild(textArea);
-                return true;
-            } catch (err) {
+                return ok;
+            } catch (e) {
                 document.body.removeChild(textArea);
                 return false;
             }
         }
     }
-    
-    // Show feedback message
+
     function showFeedback(button, message) {
-        const originalText = button.innerHTML;
+        var originalText = button.innerHTML;
         button.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> ' + message;
         button.classList.add('copied');
-        setTimeout(() => {
+        setTimeout(function() {
             button.innerHTML = originalText;
             button.classList.remove('copied');
         }, 2000);
     }
-    
-    // Setup copy prompt button
-    const copyPromptBtn = document.getElementById('copyPromptBtn');
+
+    var copyPromptBtn = document.getElementById('copyPromptBtn');
     if (copyPromptBtn) {
+        fetchPrompt();
         copyPromptBtn.addEventListener('click', async function(e) {
             e.preventDefault();
             e.stopPropagation();
-            
             try {
-                const fullPrompt = getAIPrompt();
-                
-                const success = await copyToClipboard(fullPrompt);
-                
+                var fullPrompt = getFullPrompt();
+                var success = await copyToClipboard(fullPrompt);
                 if (success) {
                     showFeedback(copyPromptBtn, 'Copied!');
+                    sendCopyEvent();
                 } else {
-                    console.error('Clipboard copy failed');
                     prompt('Copy this text:', fullPrompt);
                 }
             } catch (error) {
