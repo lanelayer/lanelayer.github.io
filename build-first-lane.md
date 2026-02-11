@@ -8,7 +8,7 @@ title: Build Your First Lane
     <p class="hero-intro">Get out your ChatGPT, Cursor or Claude Code</p>
     <p class="hero-subtitle">We recommend opening up a new project in Cursor or Claude Code first, then paste this prompt.</p>
     
-    <div class="copy-prompt-container">
+    <div class="copy-prompt-container" data-analytics-base="{{ site.analytics_base_url | default: 'https://lanelayer-analytics.fly.dev' }}">
         <button id="copyPromptBtn" class="copy-prompt-btn" title="Copy AI prompt">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -22,7 +22,9 @@ title: Build Your First Lane
 
 <script>
 (function() {
-    var ANALYTICS_API = 'https://helper.lanelayer.com/api/v1';
+    var container = document.querySelector('.copy-prompt-container');
+    var base = (container && container.getAttribute('data-analytics-base')) || 'https://lanelayer-analytics.fly.dev';
+    var ANALYTICS_API = base.replace(/\/$/, '') + '/api/v1';
 
     // Get or create anonymous user ID
     function getOrCreateUserId() {

@@ -2,6 +2,8 @@ title: LaneLayer Documentation
 description: Documentation for the LaneLayer project, including Core Lane and Filler Bot.
 baseurl: ""
 url: "https://lanelayer.github.io"
+# Analytics backend (prompt + events). Change when deploying elsewhere.
+analytics_base_url: "https://lanelayer-analytics.fly.dev"
 markdown: kramdown
 highlighter: rouge
 include: ['_pages']
