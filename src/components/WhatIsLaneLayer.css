@@ -1,0 +1,36 @@
+.what-is-lane {
+  padding: 100px 0;
+}
+
+.what-is-lane .section-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--white-smoke);
+  margin: 0 0 1.5rem;
+}
+
+.what-is-lane-simple,
+.what-is-lane-diff {
+  max-width: 640px;
+  margin: 0 0 1rem;
+  color: var(--ash);
+  line-height: 1.7;
+}
+
+.what-is-lane-simple em {
+  color: var(--electric-cyan);
+  font-style: normal;
+}
+
+.what-is-lane-cta {
+  margin: 1.5rem 0 0;
+  font-size: 1rem;
+}
+
+.what-is-lane-cta a {
+  color: var(--electric-cyan);
+}
+
+.what-is-lane-cta a:hover {
+  text-decoration: underline;
+}

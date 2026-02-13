@@ -1,0 +1,25 @@
+.builder-cta {
+  padding: 100px 0;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.builder-cta-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--white-smoke);
+  margin: 0 0 0.5rem;
+}
+
+.builder-cta-sub {
+  color: var(--ash);
+  font-size: 1.125rem;
+  margin: 0 0 1.5rem;
+}
+
+.builder-cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
