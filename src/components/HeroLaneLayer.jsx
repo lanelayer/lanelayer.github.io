@@ -21,7 +21,7 @@ export default function HeroLaneLayer() {
         <h1 className="hero-lane-title">
           Build real applications that pay with Bitcoin, run like cloud apps, and anchor directly to Bitcoin.
         </h1>
-        <p className="hero-lane-tagline">Built for real use cases, not hype.</p>
+        <p className="hero-lane-tagline">Built for real use cases, not hype. Ship today.</p>
         <ul className="hero-lane-bullets">
           <li>No bridges</li>
           <li>Bitcoin-anchored execution infrastructure</li>
