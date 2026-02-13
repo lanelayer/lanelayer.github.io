@@ -150,7 +150,7 @@ Ask me what I want to build.`;
 
     function fetchPrompt() {
         state.userId = getOrCreateUserId();
-        return fetch(ANALYTICS_BASE + '/api/v1/prompt/latest', { method: 'GET' })
+        return fetch(ANALYTICS_BASE + '/api/v1/prompt/latest', { method: 'GET', cache: 'no-store' })
             .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
             .then(function(data) {
                 state.content = data.content;
@@ -214,6 +214,7 @@ Ask me what I want to build.`;
             e.preventDefault();
             e.stopPropagation();
             try {
+                await fetchPrompt();
                 var fullPrompt = getFullPrompt();
                 var success = await copyToClipboard(fullPrompt);
                 if (success) {
