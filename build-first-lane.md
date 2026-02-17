@@ -42,17 +42,17 @@ title: Build Your First Lane
 
 I want to build a lane on LaneLayer (Bitcoin-anchored execution environment). Help me from idea to a live derived lane RPC endpoint. Seek out the information you need from the URLs below; don't assume everything is in this prompt.
 
-## You have no memory across restarts
+## Your memory model: File-based only
 
-You cannot form new memories between sessions. When this folder is opened again (new chat or new agent), you have no recall of prior conversation.
+You have no native memory between sessions. When this folder is opened again (new chat or new agent), you have no recall of prior conversations. Your only memory is what's written in files.
 
-- **On every session start:** Before doing anything else, read \`journey.log\` in the project root. Use it to see where we are, what was decided, and what to do next.
-- **Leave notes so the next run can resume:** Write everything that matters into \`journey.log\`. The next run must be able to continue from that file alone.
+- **On every session start:** Before doing anything else, read \`journey.log\` in the project root to see where we are, what was decided, and what to do next.
+- **Persist progress to disk:** Write everything that matters into \`journey.log\`. The next session must be able to continue from that file alone.
 - **Never assume prior context:** No journey.log or empty? Treat as fresh start. If there is content, summarize what you learned and propose the next step.
 
-## Keep a journey log
+## The journey log is your only memory
 
-Maintain \`journey.log\` in the project root. It is your only persistent memory. Track: questions and answers, key decisions, current phase (interview, git, building, testing, deployment), blockers, solutions. Update after each significant step.
+Because you have no memory across restarts, always read \`journey.log\` at session start and write all resumable state to it. Keep a journey log in the project root as your persistent memory across sessions. Track: questions and answers, key decisions, current phase (interview, git, building, testing, deployment), blockers, and solutions. Update it after each significant step.
 
 ## Step 1: Interview me
 
