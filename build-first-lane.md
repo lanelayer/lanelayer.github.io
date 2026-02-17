@@ -37,92 +37,39 @@ title: Build Your First Lane
         } catch (e) { return 'web_' + Date.now(); }
     }
 
-    function getFallbackPrompt() {
-        return `# Build My Lane
-
-I want to build a lane on LaneLayer (Bitcoin-anchored execution environment). Help me from idea to a live derived lane RPC endpoint. Seek out the information you need from the URLs below; don't assume everything is in this prompt.
-
-## Your memory model: File-based only
-
-You have no native memory between sessions. When this folder is opened again (new chat or new agent), you have no recall of prior conversations. Your only memory is what's written in files.
-
-- **On every session start:** Before doing anything else, read \`journey.log\` in the project root to see where we are, what was decided, and what to do next.
-- **Persist progress to disk:** Write everything that matters into \`journey.log\`. The next session must be able to continue from that file alone.
-- **Never assume prior context:** No journey.log or empty? Treat as fresh start. If there is content, summarize what you learned and propose the next step.
-
-## The journey log is your only memory
-
-Because you have no memory across restarts, always read \`journey.log\` at session start and write all resumable state to it. Keep a journey log in the project root as your persistent memory across sessions. Track: questions and answers, key decisions, current phase (interview, git, building, testing, deployment), blockers, and solutions. Update it after each significant step.
-
-## Step 1: Interview me
-
-Interview me based on the guidance at https://lanelayer-analytics.fly.dev/api/v1/docs/interview-guide (fetch that URL for the full interview rules and questions). Log all answers in journey.log.
-
-## Step 2: Guide me through Git and GitHub
-
-From the start, guide me through source control: repo init, commit flow, GitHub repo setup, push, and container packaging. Follow the guidance at https://lanelayer-analytics.fly.dev/api/v1/docs/github-flow (fetch that URL for the full Git/GitHub steps). Prompt me with the exact git commands; I run them. Log each step in journey.log.
-
-## Step 3: Check my CLI
-
-Have me run \`lane --help\`. If missing: \`npm install -g @lanelayer/cli\`. Always use real CLI output for current syntax. CLI is the source of truth: https://github.com/lanelayer/cli
-
-## Step 4: Build it
-
-Create the lane (\`lane create <name> --template python\` or per guide), implement with the K/V API, follow patterns from the docs. Get details from https://lanelayer.com/guide-reference.html. Update journey.log with decisions.
-
-## Step 5: Test, then deployment
-
-Guide me through testing endpoints and K/V. For deployment (push to registry, LaneLayer infra, live RPC/Anvil), see https://lanelayer-analytics.fly.dev/api/v1/docs/developer-workflow (fetch that URL for the full workflow) and the deployment section of the guide.
-
-## Where to look (fetch when you need details)
-
-- **Interview questions:** https://lanelayer-analytics.fly.dev/api/v1/docs/interview-guide
-- **Git/GitHub flow:** https://lanelayer-analytics.fly.dev/api/v1/docs/github-flow
-- **Full workflow (RISC-V, deployment, resilience):** https://lanelayer-analytics.fly.dev/api/v1/docs/developer-workflow
-- **Build guide (setup, K/V, deploy):** https://lanelayer.com/guide-reference.html
-- **CLI (source of truth):** https://github.com/lanelayer/cli
-- **Help / escalation:** https://discord.gg/F9GwH7zzJm
-
-## If we get stuck
-
-Break down the problem; point me to the docs above. If still stuck, help me post in Discord with: what I'm doing, what I tried, exact error, CLI version. Format so I can copy-paste.
-
-## Key things to remember
-
-- On session start: read journey.log before acting.
-- Guide me through Git/GitHub from the start using the github-flow guidance.
-- CLI is source of truth; use K/V API for persistence; test before deploy.
-- Keep journey.log updated so the next session can resume.
-
-## Start now
-
-If this folder has a journey.log, read it and say where we are and what you suggest next. If not, ask me what I want to build.`;
-    }
-
     function applyPlaceholders(text, sessionId, userId) {
         if (!text) return text;
         return text.replace(/\{\{SESSION_ID\}\}/g, sessionId || 'none').replace(/\{\{USER_ID\}\}/g, userId || '');
     }
 
-    function getFullPrompt() {
-        var userId = state.userId || getOrCreateUserId();
-        state.userId = userId;
-        if (state.content != null)
-            return applyPlaceholders(state.content, state.sessionId, userId);
-        return getFallbackPrompt();
-    }
-
     function fetchPrompt() {
         state.userId = getOrCreateUserId();
-        return fetch(ANALYTICS_BASE + '/api/v1/prompt/latest', { method: 'GET', cache: 'no-store' })
-            .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        var url = ANALYTICS_BASE + '/api/v1/prompt/latest?t=' + Date.now();
+        return fetch(url, { method: 'GET', cache: 'no-store' })
+            .then(function(r) {
+                if (!r.ok) { var e = new Error('fetch_failed'); e.status = r.status; throw e; }
+                return r.json();
+            })
             .then(function(data) {
                 state.content = data.content;
                 state.sessionId = data.session_id;
                 state.version = data.version;
                 return state;
+            });
+    }
+
+    function sendPromptFetchError(err, status) {
+        var userId = state.userId || getOrCreateUserId();
+        return fetch(ANALYTICS_BASE + '/api/v1/events', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                event_type: 'prompt_fetch_error',
+                user_id: userId,
+                session_id: null,
+                data: { error: (err && err.message) || 'unknown', status: status || null }
             })
-            .catch(function() { return null; });
+        }).catch(function() {});
     }
 
     function sendCopyEvent() {
@@ -173,23 +120,30 @@ If this folder has a journey.log, read it and say where we are and what you sugg
 
     var copyPromptBtn = document.getElementById('copyPromptBtn');
     if (copyPromptBtn) {
-        fetchPrompt();
+        fetchPrompt().catch(function() {});
         copyPromptBtn.addEventListener('click', async function(e) {
             e.preventDefault();
             e.stopPropagation();
             try {
                 await fetchPrompt();
-                var fullPrompt = getFullPrompt();
+                if (state.content == null) {
+                    sendPromptFetchError(new Error('fetch_failed'), null);
+                    showFeedback(copyPromptBtn, 'Failed to load prompt');
+                    alert('Could not load prompt. Please try again or check your connection.');
+                    return;
+                }
+                var fullPrompt = applyPlaceholders(state.content, state.sessionId, state.userId);
                 var success = await copyToClipboard(fullPrompt);
                 if (success) {
                     showFeedback(copyPromptBtn, 'Copied!');
                     sendCopyEvent();
                 } else {
-                    prompt('Copy this text:', fullPrompt);
+                    alert('Could not copy to clipboard.');
                 }
             } catch (error) {
-                console.error('Error copying prompt:', error);
-                alert('Error copying prompt. Check console for details.');
+                sendPromptFetchError(error, error.status != null ? error.status : null);
+                showFeedback(copyPromptBtn, 'Error');
+                alert('Could not load prompt. Please try again.');
             }
         });
     }
