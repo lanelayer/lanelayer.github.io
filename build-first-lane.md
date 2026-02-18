@@ -26,6 +26,7 @@ title: Build Your First Lane
     var ANALYTICS_BASE = (container && container.getAttribute('data-analytics-base')) || 'https://lanelayer-analytics.fly.dev';
     var USER_ID_KEY = 'lanelayer_web_user_id';
     var state = { content: null, sessionId: null, version: null, userId: null };
+    var inflightFetchPromise = null;
 
     function getOrCreateUserId() {
         try {
@@ -42,10 +43,14 @@ title: Build Your First Lane
         return text.replace(/\{\{SESSION_ID\}\}/g, sessionId || 'none').replace(/\{\{USER_ID\}\}/g, userId || '');
     }
 
-    function fetchPrompt() {
+    function fetchPrompt(forceRefresh) {
+        if (state.content != null && !forceRefresh)
+            return Promise.resolve(state);
+        if (inflightFetchPromise != null)
+            return inflightFetchPromise;
         state.userId = getOrCreateUserId();
         var url = ANALYTICS_BASE + '/api/v1/prompt/latest?t=' + Date.now();
-        return fetch(url, { method: 'GET', cache: 'no-store' })
+        inflightFetchPromise = fetch(url, { method: 'GET', cache: 'no-store' })
             .then(function(r) {
                 if (!r.ok) { var e = new Error('fetch_failed'); e.status = r.status; throw e; }
                 return r.json();
@@ -54,8 +59,14 @@ title: Build Your First Lane
                 state.content = data.content;
                 state.sessionId = data.session_id;
                 state.version = data.version;
+                inflightFetchPromise = null;
                 return state;
+            })
+            .catch(function(err) {
+                inflightFetchPromise = null;
+                throw err;
             });
+        return inflightFetchPromise;
     }
 
     function sendPromptFetchError(err, status) {
