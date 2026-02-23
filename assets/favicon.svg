@@ -1,0 +1,24 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" fill="#0B0B0B" rx="6"/>
+  
+  <!-- LaneLayer Logo Symbol - Stylized "S" or wave -->
+  <g transform="translate(4, 8)">
+    <!-- Upper curve - Signal Orange -->
+    <path d="M2,2 Q6,0 10,2 Q14,4 18,2 Q22,0 26,2" 
+          stroke="#FF6B00" 
+          stroke-width="3" 
+          fill="none" 
+          stroke-linecap="round"/>
+    
+    <!-- Lower curve - Electric Cyan -->
+    <path d="M2,10 Q6,12 10,10 Q14,8 18,10 Q22,12 26,10" 
+          stroke="#00E0FF" 
+          stroke-width="3" 
+          fill="none" 
+          stroke-linecap="round"/>
+    
+    <!-- Connection point - Deep Purple -->
+    <circle cx="26" cy="6" r="1.5" fill="#5E3EFF"/>
+  </g>
+</svg>

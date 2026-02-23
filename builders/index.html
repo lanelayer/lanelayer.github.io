@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="See what developers are building on LaneLayer — Bitcoin-native apps, payment systems, and more." />
+  <title>Builder Wall — LaneLayer</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body>
+
+  <header class="nav-header" id="nav-header">
+    <div class="container nav-inner">
+      <a href="/" class="nav-logo">
+        <span class="logo-mark">⬡</span>
+        <span class="logo-text">LaneLayer</span>
+      </a>
+      <nav class="nav-links" id="nav-links">
+        <a href="/builders/" style="color: var(--accent);">Builders</a>
+        <a href="/docs/guide-reference.md">Docs</a>
+        <a href="#" class="nav-disabled">Blog</a>
+        <a href="https://discord.gg/F9GwH7zzJm" target="_blank" rel="noopener">Discord</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="https://discord.gg/F9GwH7zzJm" class="btn btn-primary" target="_blank" rel="noopener">Launch App</a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main style="padding-top: 64px;">
+    <section class="section">
+      <div class="container">
+        <div class="ticker-bar" style="margin-bottom: 32px;">
+          <span class="ticker-label">Live</span>
+          <span class="ticker-text">3 projects shipped this month →</span>
+        </div>
+        <h1 style="font-size: clamp(32px, 4vw, 52px); font-weight: 800; letter-spacing: -1px; margin-bottom: 16px;">
+          BUILDER WALL
+        </h1>
+        <p style="font-size: 18px; color: var(--text-secondary); max-width: 520px; margin-bottom: 56px;">
+          Real apps built by real developers on LaneLayer. Every project settles to Bitcoin.
+        </p>
+
+        <div class="grid grid-3 projects-grid">
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-dot"></div>
+              <span class="project-tag">Live</span>
+            </div>
+            <h3 class="project-name">LocalPay Kenya</h3>
+            <p class="project-desc">Merchant credit ledger for circular economies. Enables local merchants to extend credit and track repayments — all settled to Bitcoin.</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-sm btn-outline">GitHub</a>
+              <a href="#" class="btn btn-sm btn-outline">Live Demo</a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-dot"></div>
+              <span class="project-tag">Live</span>
+            </div>
+            <h3 class="project-name">PrivateBooks</h3>
+            <p class="project-desc">Accounting with selective disclosure. Businesses share only what auditors need to see, with cryptographic proof and Bitcoin finality.</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-sm btn-outline">GitHub</a>
+              <a href="#" class="btn btn-sm btn-outline">Live Demo</a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-dot"></div>
+              <span class="project-tag">Live</span>
+            </div>
+            <h3 class="project-name">EscrowBot</h3>
+            <p class="project-desc">Milestone payments for freelancers. Funds release automatically when work is verified — no middleman, no custody, just Bitcoin.</p>
+            <div class="project-links">
+              <a href="#" class="btn btn-sm btn-outline">GitHub</a>
+              <a href="#" class="btn btn-sm btn-outline">Live Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 80px; padding: 48px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); text-align: center;">
+          <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 12px;">Built something?</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 28px; max-width: 400px; margin-left: auto; margin-right: auto;">
+            Share your project in Discord and get featured on the builder wall.
+          </p>
+          <a href="https://discord.gg/F9GwH7zzJm" class="btn btn-primary" target="_blank" rel="noopener">Share in Discord</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-disclaimer">
+          ⚠️ <strong>Experimental Software:</strong> LaneLayer is live on Bitcoin mainnet, but state formats may change. Don't risk money you can't afford to lose.
+          <a href="/docs/legacy-index.md">Read Full Disclaimer →</a>
+        </p>
+        <p class="footer-copy">© 2026 LaneLayer. Built by builders, for builders.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('nav-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    });
+    const toggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      toggle.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
