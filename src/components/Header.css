@@ -12,6 +12,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 24px;
+  gap: 24px;
+  position: relative;
 }
 
 .logo-img {
@@ -20,6 +22,7 @@
   display: block;
 }
 
+/* ── Text nav links ── */
 .nav {
   display: flex;
   align-items: center;
@@ -30,16 +33,92 @@
   color: var(--white-smoke);
   font-weight: 500;
   font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.15s;
 }
 
 .nav a:hover {
-  color: var(--electric-cyan);
+  color: #f7931a;
+}
+
+/* ── Social icons + hamburger ── */
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  color: var(--ash);
+  transition: color 0.15s, background 0.15s;
   text-decoration: none;
 }
 
+.nav-icon-btn:hover {
+  color: #f7931a;
+  background: rgba(247, 147, 26, 0.08);
+}
+
+/* ── Hamburger ── */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--white-smoke);
+  border-radius: 2px;
+  transition: background 0.15s;
+}
+
+.nav-toggle:hover span {
+  background: #f7931a;
+}
+
+/* ── Mobile ── */
 @media (max-width: 767px) {
   .nav {
-    gap: 20px;
-    font-size: 0.9rem;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--obsidian);
+    border-bottom: 1px solid rgba(158, 163, 175, 0.15);
+    padding: 8px 24px 16px;
+  }
+
+  .nav.nav-open {
+    display: flex;
+  }
+
+  .nav a {
+    padding: 10px 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(158, 163, 175, 0.08);
+  }
+
+  .nav-toggle {
+    display: flex;
   }
 }
