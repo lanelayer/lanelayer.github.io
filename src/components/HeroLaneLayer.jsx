@@ -22,7 +22,7 @@ export default function HeroLaneLayer() {
         </div>
 
         <h1 className="hero-lane-title">
-          Build apps that pay<br />with Bitcoin
+          Build apps that pay with Bitcoin
         </h1>
 
         <p className="hero-lane-sub">
