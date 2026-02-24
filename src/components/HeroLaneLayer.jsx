@@ -6,6 +6,8 @@ export default function HeroLaneLayer() {
   return (
     <section className="hero-lane">
       <div className="container hero-lane-inner">
+        <div className="hero-badge">Bitcoin-anchored execution infrastructure</div>
+
         <div className="hero-lane-image-wrap" aria-hidden="true">
           <img
             className="hero-lane-image"
@@ -18,17 +20,25 @@ export default function HeroLaneLayer() {
             fetchPriority="high"
           />
         </div>
+
         <h1 className="hero-lane-title">
-          Build real applications that pay with Bitcoin, run like cloud apps, and anchor directly to Bitcoin.
+          Build apps that pay with Bitcoin
         </h1>
-        <p className="hero-lane-tagline">Built for real use cases, not hype.</p>
-        <ul className="hero-lane-bullets">
+
+        <p className="hero-lane-sub">
+          No bridges. No new chain. Normal developer workflows,
+          anchored directly to Bitcoin.
+        </p>
+
+        <ul className="hero-lane-chips">
           <li>No bridges</li>
-          <li>Bitcoin-anchored execution infrastructure</li>
-          <li>Normal developer workflows</li>
+          <li>Bitcoin-anchored</li>
+          <li>Normal dev workflows</li>
         </ul>
+
         <div className="hero-lane-ctas">
-          <Link to="/developers" className="btn btn-primary">Get started</Link>
+          <Link to="/developers" className="btn btn-primary">Start building</Link>
+          <Link to="/how-it-works" className="btn btn-secondary">How it works</Link>
         </div>
       </div>
     </section>
