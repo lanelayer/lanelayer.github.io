@@ -19,6 +19,7 @@ export default function Footer() {
             <div className="footer-col">
               <h4>Contact</h4>
               <a href="https://discord.gg/F9GwH7zzJm" target="_blank" rel="noopener noreferrer">Discord</a>
+              <a href="https://x.com/lanelayer" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
             </div>
             <div className="footer-col">
               <h4>Legal</h4>
