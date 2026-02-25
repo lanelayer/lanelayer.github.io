@@ -10,7 +10,7 @@ const steps = [
 
 export default function HowItWorksTeaser() {
   return (
-    <section className="how-teaser">
+    <section className="how-teaser" data-reveal>
       <div className="container">
         <h2 className="section-title">How it works</h2>
         <p className="how-teaser-lead">

@@ -2,7 +2,7 @@ import './BuilderCTA.css'
 
 export default function BuilderCTA() {
   return (
-    <section className="builder-cta">
+    <section className="builder-cta" data-reveal>
       <div className="container">
         <h2 className="builder-cta-title">Build on LaneLayer</h2>
         <p className="builder-cta-sub">

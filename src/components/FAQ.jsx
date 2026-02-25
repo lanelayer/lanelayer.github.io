@@ -20,7 +20,7 @@ const whatIsNot = [
 export default function FAQ() {
   const [openBroader, setOpenBroader] = useState(false)
   return (
-    <section id="faq" className="faq">
+    <section id="faq" className="faq" data-reveal>
       <div className="container">
         <h2 className="faq-title">What LaneLayer is</h2>
         <ul className="faq-list what-is">

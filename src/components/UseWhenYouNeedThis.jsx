@@ -10,7 +10,7 @@ const needs = [
 
 export default function UseWhenYouNeedThis() {
   return (
-    <section className="use-when">
+    <section className="use-when" data-reveal>
       <div className="container">
         <h2 className="section-title">Use LaneLayer when you need</h2>
         <p className="use-when-lead">

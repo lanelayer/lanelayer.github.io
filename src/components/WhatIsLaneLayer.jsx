@@ -3,7 +3,7 @@ import './WhatIsLaneLayer.css'
 
 export default function WhatIsLaneLayer() {
   return (
-    <section id="what-is-lanelayer" className="what-is-lane">
+    <section id="what-is-lanelayer" className="what-is-lane" data-reveal>
       <div className="container">
         <h2 className="section-title">What is LaneLayer?</h2>
         <p className="what-is-lane-simple">
