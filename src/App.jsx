@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import HowItWorks from './pages/HowItWorks'
 import Developers from './pages/Developers'
+import BuildFirstLane from './pages/BuildFirstLane'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/developers" element={<Developers />} />
+          <Route path="/build-first-lane" element={<BuildFirstLane />} />
           <Route path="/use-cases" element={<Navigate to="/developers" replace />} />
           <Route path="/tosichain" element={<Navigate to="/developers" replace />} />
         </Routes>

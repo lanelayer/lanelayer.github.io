@@ -22,7 +22,7 @@ export default function UseWhenYouNeedThis() {
           ))}
         </ul>
         <p className="use-when-cta">
-          <Link to="/developers" className="btn btn-secondary">Start here</Link>
+          <Link to="/build-first-lane" className="btn btn-secondary">Build your first lane</Link>
         </p>
       </div>
     </section>

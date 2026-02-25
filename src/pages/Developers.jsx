@@ -16,10 +16,10 @@ export default function Developers() {
         <section className="dev-section">
           <h2>Start here</h2>
           <ol className="checklist">
+            <li><Link to="/build-first-lane">Copy the prompt and build your first lane</Link></li>
             <li>Add the RPC and get laneBTC (steps below)</li>
             <li>Join LaneLayer Discord</li>
             <li>Try a demo lane or faucet</li>
-            <li>Ask: “What would you build if this existed?”</li>
           </ol>
         </section>
         <UseInMinutes />
@@ -31,9 +31,9 @@ export default function Developers() {
           </p>
         </section>
         <div className="dev-ctas">
-          <a href="https://lanelayer.com" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Docs</a>
+          <Link to="/build-first-lane" className="btn btn-primary">Build your first lane</Link>
+          <a href="https://docs.lanelayer.com" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Docs</a>
           <a href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Join Discord</a>
-          <Link to="/how-it-works" className="btn btn-secondary">How it works</Link>
         </div>
       </div>
     </article>

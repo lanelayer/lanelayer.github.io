@@ -32,10 +32,10 @@ export default function Header() {
         </Link>
 
         <nav className={`nav${menuOpen ? ' nav-open' : ''}`}>
-          <Link to="/products" onClick={close}>Products</Link>
-          <Link to="/join-us" onClick={close}>Join Us</Link>
-          <Link to="/blog" onClick={close}>Blog</Link>
-          <a href="https://docs.lanelayer.com" target="_blank" rel="noopener noreferrer" onClick={close}>Documentation</a>
+          <Link to="/build-first-lane" onClick={close}>Build Lane</Link>
+          <Link to="/how-it-works" onClick={close}>How it works</Link>
+          <Link to="/developers" onClick={close}>Developers</Link>
+          <a href="https://docs.lanelayer.com" target="_blank" rel="noopener noreferrer" onClick={close}>Docs</a>
         </nav>
 
         <div className="nav-icons">

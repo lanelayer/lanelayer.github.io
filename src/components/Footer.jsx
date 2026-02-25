@@ -12,9 +12,10 @@ export default function Footer() {
           <div className="footer-columns">
             <div className="footer-col">
               <h4>Platform</h4>
-              <a href="https://lanelayer.com" target="_blank" rel="noopener noreferrer">Docs</a>
+              <Link to="/build-first-lane">Build Lane</Link>
               <Link to="/how-it-works">How it works</Link>
               <Link to="/developers">Developers</Link>
+              <a href="https://docs.lanelayer.com" target="_blank" rel="noopener noreferrer">Docs</a>
             </div>
             <div className="footer-col">
               <h4>Contact</h4>
