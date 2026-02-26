@@ -40,7 +40,7 @@ export default function HowItWorks() {
           </p>
         </section>
         <p className="cta-wrap">
-          <Link to="/build-first-lane" className="btn btn-primary">Build your first lane</Link>
+          <Link to="/#build-first-lane" className="btn btn-primary">Build your first lane</Link>
         </p>
       </div>
     </article>

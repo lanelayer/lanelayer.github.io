@@ -150,7 +150,7 @@ export default function BuildFirstLane() {
   }, [])
 
   return (
-    <div className="ai-first-hero" ref={containerRef} data-analytics-base="https://lanelayer-analytics.fly.dev">
+    <div id="build-first-lane" className="ai-first-hero" ref={containerRef} data-analytics-base="https://lanelayer-analytics.fly.dev">
       <h1>Build Your First Lane</h1>
       <p className="hero-intro">Get out your ChatGPT, Cursor or Claude Code</p>
       <p className="hero-subtitle">We recommend opening up a new project in Cursor or Claude Code first, then paste this prompt.</p>
