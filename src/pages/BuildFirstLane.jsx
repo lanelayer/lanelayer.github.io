@@ -8,7 +8,9 @@ export default function BuildFirstLane() {
     const container = containerRef.current
     if (!container) return
 
-    const ANALYTICS_BASE = import.meta.env.DEV ? '' : (container.getAttribute('data-analytics-base') || 'https://lanelayer-analytics.fly.dev')
+    // Use same-origin /api when on localhost so dev and preview can proxy to analytics (avoids CORS)
+    const isLocalhost = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    const ANALYTICS_BASE = (import.meta.env.DEV || isLocalhost) ? '' : (container.getAttribute('data-analytics-base') || 'https://lanelayer-analytics.fly.dev')
     const USER_ID_KEY = 'lanelayer_web_user_id'
     const state = { content: null, sessionId: null, version: null, userId: null }
     let inflightFetchPromise = null

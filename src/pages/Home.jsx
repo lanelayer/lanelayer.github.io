@@ -12,8 +12,14 @@ export default function Home() {
   const { hash } = useLocation()
   useEffect(() => {
     if (hash === '#build-first-lane') {
-      const el = document.getElementById('build-first-lane')
-      el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      // Small delay so the section is in the DOM when navigating from another page
+      const t = requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const el = document.getElementById('build-first-lane')
+          el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        })
+      })
+      return () => cancelAnimationFrame(t)
     }
   }, [hash])
 

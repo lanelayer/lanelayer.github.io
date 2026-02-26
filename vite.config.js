@@ -12,4 +12,13 @@ export default defineConfig({
       },
     },
   },
+  preview: {
+    proxy: {
+      '/api': {
+        target: 'https://lanelayer-analytics.fly.dev',
+        changeOrigin: true,
+        secure: true,
+      },
+    },
+  },
 })
