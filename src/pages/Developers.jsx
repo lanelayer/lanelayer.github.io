@@ -32,8 +32,6 @@ export default function Developers() {
         </section>
         <div className="dev-ctas">
           <Link to="/#build-first-lane" className="btn btn-primary">Build your first lane</Link>
-          <a href="https://docs.lanelayer.com" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Docs</a>
-          <a href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Join Discord</a>
         </div>
       </div>
     </article>

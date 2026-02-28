@@ -51,7 +51,7 @@ img {
 }
 
 section {
-  padding: 60px 0;
+  padding: 40px 0;
   content-visibility: auto; /* skip off-screen work for smoother scroll */
   contain-intrinsic-size: auto 400px;
 }
