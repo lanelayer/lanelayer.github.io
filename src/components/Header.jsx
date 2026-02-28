@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import './Header.css'
 
 const DiscordIcon = () => (
@@ -32,9 +32,9 @@ export default function Header() {
         </Link>
 
         <nav className={`nav${menuOpen ? ' nav-open' : ''}`}>
-          <Link to="/#build-first-lane" onClick={close}>Build Lane</Link>
-          <Link to="/how-it-works" onClick={close}>How it works</Link>
-          <Link to="/developers" onClick={close}>Developers</Link>
+          <NavLink to="/#build-first-lane" onClick={close}>Build Lane</NavLink>
+          <NavLink to="/how-it-works" onClick={close}>How it works</NavLink>
+          <NavLink to="/developers" onClick={close}>Developers</NavLink>
           <a href="https://docs.lanelayer.com" target="_blank" rel="noopener noreferrer" onClick={close}>Docs</a>
         </nav>
 

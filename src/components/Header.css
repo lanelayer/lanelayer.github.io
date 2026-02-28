@@ -37,7 +37,8 @@
   transition: color 0.15s;
 }
 
-.nav a:hover {
+.nav a:hover,
+.nav a.active {
   color: #f7931a;
 }
 

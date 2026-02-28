@@ -14,7 +14,7 @@ export default function HowItWorksTeaser() {
       <div className="container">
         <h2 className="section-title">How it works</h2>
         <p className="how-teaser-lead">
-          Intents → Lanes → laneBTC → Settlement references. Execution off-chain; Bitcoin provides ordering and value anchoring.
+          Intents → Lanes → laneBTC → Settlement references. Execution off{'\u2011'}chain; Bitcoin provides ordering and value anchoring.
         </p>
         <div className="how-teaser-grid">
           {steps.map((step, i) => (

@@ -51,7 +51,7 @@ img {
 }
 
 section {
-  padding: 80px 0;
+  padding: 60px 0;
   content-visibility: auto; /* skip off-screen work for smoother scroll */
   contain-intrinsic-size: auto 400px;
 }
@@ -82,7 +82,7 @@ h1 {
 }
 
 .btn-primary {
-  background: linear-gradient(170deg, var(--signal-orange), var(--electric-cyan));
+  background: linear-gradient(170deg, #f7931a, var(--electric-cyan));
   color: var(--obsidian);
 }
 
