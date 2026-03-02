@@ -31,12 +31,6 @@ export default function UseInMinutes() {
 RPC URL: ${RPC_URL}
 Chain ID: ${CHAIN_ID}
 Currency symbol: ${CURRENCY_SYMBOL}`
-  const [promptCopied, setPromptCopied] = useState(false)
-  const copyPrompt = () => {
-    navigator.clipboard.writeText(fullPrompt)
-    setPromptCopied(true)
-    setTimeout(() => setPromptCopied(false), 2000)
-  }
 
   return (
     <section id="use-in-minutes" className="use-in-minutes">
@@ -50,9 +44,6 @@ Currency symbol: ${CURRENCY_SYMBOL}`
           <p>Use “Add network” in MetaMask. Copy individual fields, or copy the whole block.</p>
           <div className="copy-prompt-block">
             <pre className="copy-prompt-text">{fullPrompt}</pre>
-            <button type="button" className="btn copy-prompt-btn" onClick={copyPrompt}>
-              {promptCopied ? 'Copied to clipboard' : 'Copy to prompt'}
-            </button>
           </div>
           <div className="copy-blocks">
             <CopyBlock label="Network name" value={NETWORK_NAME} />

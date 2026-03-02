@@ -1,6 +1,5 @@
 .hero-lane {
-  padding: 80px 0;
-  text-align: left;
+  padding: 96px 0 88px;
   position: relative;
   overflow: hidden;
 }
@@ -20,8 +19,14 @@
 .hero-lane-inner {
   position: relative;
   z-index: 1;
-  max-width: 900px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 3rem;
+  max-width: 1120px;
 }
+
+.hero-lane-left { text-align: left; }
 
 /* ── Badge ── */
 .hero-badge {
@@ -93,4 +98,38 @@
 .hero-lane-ctas .btn {
   padding: 1rem 2.5rem;
   border-radius: 12px;
+}
+
+/* ── Right-side layout (existing content only) ── */
+.hero-lane-right {
+  min-width: 280px;
+}
+
+.hero-lane-right-panel {
+  border-radius: 20px;
+  padding: 1.25rem 1.25rem 1.5rem;
+  border: 1px solid rgba(247, 147, 26, 0.18);
+  background: radial-gradient(circle at top left, rgba(247, 147, 26, 0.06), transparent 60%);
+}
+
+.hero-lane-right-panel .hero-lane-chips {
+  margin-bottom: 1.5rem;
+}
+
+.hero-lane-right-panel .hero-lane-ctas {
+  gap: 1rem;
+}
+
+.hero-lane-right-panel .hero-lane-ctas .btn {
+  padding: 0.95rem 1.6rem;
+}
+
+@media (max-width: 960px) {
+  .hero-lane-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-lane-right {
+    width: 100%;
+  }
 }

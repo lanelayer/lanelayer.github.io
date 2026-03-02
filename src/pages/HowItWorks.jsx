@@ -39,9 +39,6 @@ export default function HowItWorks() {
             There is no proof-enforced canonical state. The state that matters is the one participants run, build on, and settle against. LaneLayer is designed to be legible, inspectable, and degrade without catastrophic custody loss.
           </p>
         </section>
-        <p className="cta-wrap">
-          <Link to="/#build-first-lane" className="btn btn-primary">Build your first lane</Link>
-        </p>
       </div>
     </article>
   )
