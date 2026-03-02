@@ -1,5 +1,5 @@
 .how-teaser {
-  padding: 100px 0;
+  padding: 40px 0;
   background: rgba(0, 0, 0, 0.2);
 }
 
@@ -26,8 +26,8 @@
 
 .how-teaser-item {
   padding: 1.25rem;
-  background: rgba(158, 163, 175, 0.06);
-  border: 1px solid rgba(158, 163, 175, 0.12);
+  background: rgba(26, 26, 26, 0.9);
+  border: 1px solid rgba(158, 163, 175, 0.15);
   border-radius: 10px;
 }
 

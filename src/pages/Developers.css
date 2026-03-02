@@ -1,5 +1,5 @@
 .developers-page {
-  padding: 80px 0 120px;
+  padding: 60px 0 80px;
 }
 
 .developers-page h1 {
@@ -10,12 +10,12 @@
   font-size: 1.25rem;
   color: var(--ash);
   max-width: 640px;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   line-height: 1.6;
 }
 
 .dev-section {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 .dev-section h2 {
@@ -42,5 +42,5 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 3rem;
+  margin-top: 1.5rem;
 }

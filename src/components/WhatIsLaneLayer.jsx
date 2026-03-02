@@ -12,9 +12,6 @@ export default function WhatIsLaneLayer() {
         <p className="what-is-lane-diff">
           Developers think in services, state, and workflows—not scripts and transaction mechanics. Execution happens off Bitcoin, while economic truth stays anchored to Bitcoin. No custody honeypots. No single bridge that everything depends on.
         </p>
-        <p className="what-is-lane-cta">
-          <Link to="#faq">What LaneLayer is / is not</Link> · <Link to="/how-it-works">How it works</Link>
-        </p>
       </div>
     </section>
   )
