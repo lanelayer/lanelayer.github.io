@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container">
         <div className="footer-top">
           <Link to="/" className="footer-logo">
-            <img src="https://lanelayer.com/assets/images/logo.png" alt="LaneLayer" />
+            <img src="/images/logo.png" alt="LaneLayer" />
           </Link>
           <div className="footer-columns">
             <div className="footer-col">
@@ -15,7 +15,6 @@ export default function Footer() {
               <Link to="/#build-first-lane">Build Lane</Link>
               <Link to="/how-it-works">How it works</Link>
               <Link to="/developers">Developers</Link>
-              <a href="https://docs.lanelayer.com" target="_blank" rel="noopener noreferrer">Docs</a>
             </div>
             <div className="footer-col">
               <h4>Contact</h4>

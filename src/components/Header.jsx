@@ -28,14 +28,13 @@ export default function Header() {
     <header className="header">
       <div className="container header-inner">
         <Link to="/" className="logo" aria-label="LaneLayer home" onClick={close}>
-          <img src="https://lanelayer.com/assets/images/logo.png" alt="LaneLayer" className="logo-img" />
+          <img src="/images/logo.png" alt="LaneLayer" className="logo-img" />
         </Link>
 
         <nav className={`nav${menuOpen ? ' nav-open' : ''}`}>
           <NavLink to="/#build-first-lane" onClick={close}>Build Lane</NavLink>
           <NavLink to="/how-it-works" onClick={close}>How it works</NavLink>
           <NavLink to="/developers" onClick={close}>Developers</NavLink>
-          <a href="https://docs.lanelayer.com" target="_blank" rel="noopener noreferrer" onClick={close}>Docs</a>
         </nav>
 
         <div className="nav-icons">
