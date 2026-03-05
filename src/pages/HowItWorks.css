@@ -1,0 +1,36 @@
+.how-it-works-page {
+  padding: 60px 0 80px;
+}
+
+.how-it-works-page h1 {
+  margin-bottom: 1rem;
+}
+
+.how-it-works-page .lead {
+  font-size: 1.25rem;
+  color: var(--ash);
+  max-width: 640px;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.how-section {
+  margin-bottom: 1rem;
+}
+
+.how-section h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--white-smoke);
+  margin: 0 0 0.5rem;
+}
+
+.how-section p {
+  margin: 0;
+  color: var(--ash);
+  line-height: 1.7;
+}
+
+.cta-wrap {
+  margin-top: 1.5rem;
+}
