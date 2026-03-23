@@ -14,7 +14,6 @@ export default function Footer() {
               <h4>Platform</h4>
               <Link to="/build-first-lane">Build Lane</Link>
               <Link to="/how-it-works">How it works</Link>
-              <Link to="/developers">Developers</Link>
             </div>
             <div className="footer-col">
               <h4>Contact</h4>
