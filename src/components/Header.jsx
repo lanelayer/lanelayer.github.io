@@ -34,8 +34,6 @@ export default function Header() {
         <nav className={`nav${menuOpen ? ' nav-open' : ''}`}>
           <NavLink to="/#build-first-lane" onClick={close}>Build Lane</NavLink>
           <NavLink to="/how-it-works" onClick={close}>How it works</NavLink>
-          <NavLink to="/developers" onClick={close}>Developers</NavLink>
-          <a href="https://docs.lanelayer.com" target="_blank" rel="noopener noreferrer" onClick={close}>Docs</a>
         </nav>
 
         <div className="nav-icons">
