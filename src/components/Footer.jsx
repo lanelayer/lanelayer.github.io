@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="footer-columns">
             <div className="footer-col">
               <h4>Platform</h4>
-              <Link to="/?section=build-first-lane">Build Lane</Link>
+              <Link to="/build-first-lane">Build Lane</Link>
               <Link to="/how-it-works">How it works</Link>
               <Link to="/developers">Developers</Link>
             </div>

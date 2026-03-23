@@ -11,9 +11,9 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/build-first-lane" element={<Home scrollTo="build-first-lane" />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/developers" element={<Developers />} />
-          <Route path="/build-first-lane" element={<Navigate to="/?section=build-first-lane" replace />} />
           <Route path="/use-cases" element={<Navigate to="/developers" replace />} />
           <Route path="/tosichain" element={<Navigate to="/developers" replace />} />
         </Routes>

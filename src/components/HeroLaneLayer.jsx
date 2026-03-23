@@ -26,7 +26,7 @@ export default function HeroLaneLayer() {
             </ul>
 
             <div className="hero-lane-ctas">
-              <Link to="/?section=build-first-lane" className="btn btn-primary">Build your first lane</Link>
+              <Link to="/build-first-lane" className="btn btn-primary">Build your first lane</Link>
               <Link to="/how-it-works" className="btn btn-secondary">How it works</Link>
             </div>
           </div>

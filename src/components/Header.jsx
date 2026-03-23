@@ -32,7 +32,7 @@ export default function Header() {
         </Link>
 
         <nav className={`nav${menuOpen ? ' nav-open' : ''}`}>
-          <NavLink to="/?section=build-first-lane" onClick={close}>Build Lane</NavLink>
+          <NavLink to="/build-first-lane" onClick={close}>Build Lane</NavLink>
           <NavLink to="/how-it-works" onClick={close}>How it works</NavLink>
           <NavLink to="/developers" onClick={close}>Developers</NavLink>
         </nav>

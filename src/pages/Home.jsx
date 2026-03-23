@@ -8,12 +8,11 @@ import UseWhenYouNeedThis from '../components/UseWhenYouNeedThis'
 import FAQ from '../components/FAQ'
 import BuilderCTA from '../components/BuilderCTA'
 
-export default function Home() {
-  const { hash, search } = useLocation()
-  const section = new URLSearchParams(search).get('section') || (hash === '#build-first-lane' ? 'build-first-lane' : null)
+export default function Home({ scrollTo }) {
+  const { pathname } = useLocation()
+  const shouldScroll = scrollTo === 'build-first-lane' || pathname === '/build-first-lane'
   useEffect(() => {
-    if (section === 'build-first-lane') {
-      // Small delay so the section is in the DOM when navigating from another page
+    if (shouldScroll) {
       const t = requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           const el = document.getElementById('build-first-lane')
@@ -22,7 +21,7 @@ export default function Home() {
       })
       return () => cancelAnimationFrame(t)
     }
-  }, [section])
+  }, [shouldScroll])
 
   return (
     <>

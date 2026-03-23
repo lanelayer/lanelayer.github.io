@@ -16,7 +16,7 @@ export default function Developers() {
         <section className="dev-section">
           <h2>Start here</h2>
           <ol className="checklist">
-            <li><Link to="/?section=build-first-lane">Copy the prompt and build your first lane</Link></li>
+            <li><Link to="/build-first-lane">Copy the prompt and build your first lane</Link></li>
             <li>Add the RPC and get laneBTC (steps below)</li>
             <li>Join LaneLayer Discord</li>
             <li>Try a demo lane or faucet</li>
