@@ -9,9 +9,10 @@ import FAQ from '../components/FAQ'
 import BuilderCTA from '../components/BuilderCTA'
 
 export default function Home() {
-  const { hash } = useLocation()
+  const { hash, search } = useLocation()
+  const section = new URLSearchParams(search).get('section') || (hash === '#build-first-lane' ? 'build-first-lane' : null)
   useEffect(() => {
-    if (hash === '#build-first-lane') {
+    if (section === 'build-first-lane') {
       // Small delay so the section is in the DOM when navigating from another page
       const t = requestAnimationFrame(() => {
         requestAnimationFrame(() => {
@@ -21,7 +22,7 @@ export default function Home() {
       })
       return () => cancelAnimationFrame(t)
     }
-  }, [hash])
+  }, [section])
 
   return (
     <>
