@@ -1,20 +1,33 @@
-import { HashRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route, Outlet } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import HowItWorks from './pages/HowItWorks'
+import Build from './pages/Build'
+
+function Layout() {
+  return (
+    <>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
+    </>
+  )
+}
+
 function App() {
   return (
     <HashRouter>
-      <Header />
-      <main>
-        <Routes>
+      <Routes>
+        <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/build-first-lane" element={<Home scrollTo="build-first-lane" />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
-        </Routes>
-      </main>
-      <Footer />
+        </Route>
+        <Route path="/build" element={<Build />} />
+      </Routes>
     </HashRouter>
   )
 }
