@@ -1,4 +1,9 @@
 import { useEffect, useRef } from 'react'
+import {
+  attachCopyPromptListener,
+  createPromptCopyClient,
+  resolveAnalyticsBase,
+} from '../lib/promptCopy'
 import './BuildFirstLane.css'
 
 export default function BuildFirstLane() {
@@ -8,146 +13,12 @@ export default function BuildFirstLane() {
     const container = containerRef.current
     if (!container) return
 
-    // Use same-origin /api when on localhost so dev and preview can proxy to analytics (avoids CORS)
-    const isLocalhost = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-    const ANALYTICS_BASE = (import.meta.env.DEV || isLocalhost) ? '' : (container.getAttribute('data-analytics-base') || 'https://lanelayer-analytics.fly.dev')
-    const USER_ID_KEY = 'lanelayer_web_user_id'
-    const state = { content: null, sessionId: null, version: null, userId: null }
-    let inflightFetchPromise = null
+    const client = createPromptCopyClient(resolveAnalyticsBase(container))
+    client.fetchPrompt().catch(function () {})
 
-    function getOrCreateUserId() {
-      try {
-        let id = localStorage.getItem(USER_ID_KEY)
-        if (id) return id
-        id = 'web_' + Math.random().toString(36).slice(2) + '_' + Date.now().toString(36)
-        localStorage.setItem(USER_ID_KEY, id)
-        return id
-      } catch (e) { return 'web_' + Date.now() }
-    }
-
-    function applyPlaceholders(text, sessionId, userId) {
-      if (!text) return text
-      return text.replace(/\{\{SESSION_ID\}\}/g, sessionId || 'none').replace(/\{\{USER_ID\}\}/g, userId || '')
-    }
-
-    function fetchPrompt(forceRefresh) {
-      if (state.content != null && !forceRefresh)
-        return Promise.resolve(state)
-      if (inflightFetchPromise != null)
-        return inflightFetchPromise
-      state.userId = getOrCreateUserId()
-      var url = ANALYTICS_BASE + '/api/v1/prompt/latest?t=' + Date.now()
-      inflightFetchPromise = fetch(url, { method: 'GET', cache: 'no-store' })
-        .then(function(r) {
-          if (!r.ok) { var e = new Error('fetch_failed'); e.status = r.status; throw e }
-          return r.json()
-        })
-        .then(function(data) {
-          state.content = data.content
-          state.sessionId = data.session_id
-          state.version = data.version
-          inflightFetchPromise = null
-          return state
-        })
-        .catch(function(err) {
-          inflightFetchPromise = null
-          throw err
-        })
-      return inflightFetchPromise
-    }
-
-    function sendPromptFetchError(err, status) {
-      var userId = state.userId || getOrCreateUserId()
-      return fetch(ANALYTICS_BASE + '/api/v1/events', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          event_type: 'prompt_fetch_error',
-          user_id: userId,
-          session_id: null,
-          data: { error: (err && err.message) || 'unknown', status: status || null }
-        })
-      }).catch(function() {})
-    }
-
-    function sendCopyEvent() {
-      if (!state.sessionId || !state.userId) return Promise.resolve()
-      return fetch(ANALYTICS_BASE + '/api/v1/events', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          event_type: 'copy_prompt',
-          user_id: state.userId,
-          session_id: state.sessionId,
-          data: state.version ? { prompt_version: state.version } : {}
-        })
-      }).catch(function() {})
-    }
-
-    async function copyToClipboard(text) {
-      try {
-        await navigator.clipboard.writeText(text)
-        return true
-      } catch (err) {
-        var textArea = document.createElement('textarea')
-        textArea.value = text
-        textArea.style.position = 'fixed'
-        textArea.style.opacity = '0'
-        document.body.appendChild(textArea)
-        textArea.select()
-        try {
-          var ok = document.execCommand('copy')
-          document.body.removeChild(textArea)
-          return ok
-        } catch (e) {
-          document.body.removeChild(textArea)
-          return false
-        }
-      }
-    }
-
-    function showFeedback(button, message) {
-      var originalText = button.innerHTML
-      button.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> ' + message
-      button.classList.add('copied')
-      setTimeout(function() {
-        button.innerHTML = originalText
-        button.classList.remove('copied')
-      }, 2000)
-    }
-
-    var copyPromptBtn = container.querySelector('#copyPromptBtn')
+    const copyPromptBtn = container.querySelector('#copyPromptBtn')
     if (copyPromptBtn) {
-      fetchPrompt().catch(function() {})
-
-      const handleClick = async function(e) {
-        e.preventDefault()
-        e.stopPropagation()
-        try {
-          await fetchPrompt()
-          if (state.content == null) {
-            sendPromptFetchError(new Error('fetch_failed'), null)
-            showFeedback(copyPromptBtn, 'Failed to load prompt')
-            alert('Could not load prompt. Please try again or check your connection.')
-            return
-          }
-          var fullPrompt = applyPlaceholders(state.content, state.sessionId, state.userId)
-          var success = await copyToClipboard(fullPrompt)
-          if (success) {
-            showFeedback(copyPromptBtn, 'Copied!')
-            sendCopyEvent()
-          } else {
-            alert('Could not copy to clipboard.')
-          }
-        } catch (error) {
-          sendPromptFetchError(error, error.status != null ? error.status : null)
-          showFeedback(copyPromptBtn, 'Error')
-          alert('Could not load prompt. Please try again.')
-        }
-      }
-
-      copyPromptBtn.addEventListener('click', handleClick)
-      return () => copyPromptBtn.removeEventListener('click', handleClick)
+      return attachCopyPromptListener(copyPromptBtn, client)
     }
   }, [])
 
